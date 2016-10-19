@@ -33,7 +33,7 @@ public class Mezcla extends JFrame {
 	private Image image;
 	private Rectangulo firstrec;
 	private int width, height;
-
+//
 	/**
 	 * Launch the application.
 	 */
