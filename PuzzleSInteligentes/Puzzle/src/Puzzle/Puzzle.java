@@ -3,6 +3,7 @@ package Puzzle;
 import java.awt.EventQueue;
 
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -10,6 +11,7 @@ import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.GridBagLayout;
 
 import javax.swing.JButton;
@@ -29,10 +31,10 @@ import java.net.URISyntaxException;
 public class Puzzle {
 
 	private JFrame frame;
-	private final JButton btnNewButton = new JButton("Cargar");
-	private final JButton btnNewButton_1 = new JButton("Mezclar");
-	private final JButton btnNewButton_2 = new JButton("Resolver");
-	private final JLabel label = new JLabel("");
+	private final JButton btnCargar = new JButton("Cargar");
+	private final JButton btnMezclar = new JButton("Mezclar");
+	private final JButton btnResolver = new JButton("Resolver");
+	private final JLabel lblImagen = new JLabel("");
 	private BufferedImage source;
 	private ImageIcon imagen;
 
@@ -64,7 +66,8 @@ public class Puzzle {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 547, 384);
+		frame.setResizable(false);
+		frame.setBounds(100, 100, 700, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
@@ -73,40 +76,40 @@ public class Puzzle {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		frame.getContentPane().setLayout(gridBagLayout);
 		{
-			GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-			gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
-			gbc_btnNewButton.gridx = 1;
-			gbc_btnNewButton.gridy = 0;
-			btnNewButton.addActionListener(new BtnNewButtonActionListener());
-			frame.getContentPane().add(btnNewButton, gbc_btnNewButton);
+			GridBagConstraints gbc_btnCargar = new GridBagConstraints();
+			gbc_btnCargar.insets = new Insets(0, 0, 5, 5);
+			gbc_btnCargar.gridx = 1;
+			gbc_btnCargar.gridy = 0;
+			btnCargar.addActionListener(new CargarActionListener());
+			frame.getContentPane().add(btnCargar, gbc_btnCargar);
 		}
 		{
-			GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-			gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
-			gbc_btnNewButton_1.gridx = 2;
-			gbc_btnNewButton_1.gridy = 0;
-			btnNewButton_1.addActionListener(new BtnNewButton_1ActionListener());
-			frame.getContentPane().add(btnNewButton_1, gbc_btnNewButton_1);
+			GridBagConstraints gbc_btnMezclar = new GridBagConstraints();
+			gbc_btnMezclar.insets = new Insets(0, 0, 5, 5);
+			gbc_btnMezclar.gridx = 2;
+			gbc_btnMezclar.gridy = 0;
+			btnMezclar.addActionListener(new MezclarActionListener());
+			frame.getContentPane().add(btnMezclar, gbc_btnMezclar);
 		}
 		{
-			GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
-			gbc_btnNewButton_2.insets = new Insets(0, 0, 5, 5);
-			gbc_btnNewButton_2.gridx = 3;
-			gbc_btnNewButton_2.gridy = 0;
-			frame.getContentPane().add(btnNewButton_2, gbc_btnNewButton_2);
+			GridBagConstraints gbc_btnResolver = new GridBagConstraints();
+			gbc_btnResolver.insets = new Insets(0, 0, 5, 5);
+			gbc_btnResolver.gridx = 3;
+			gbc_btnResolver.gridy = 0;
+			frame.getContentPane().add(btnResolver, gbc_btnResolver);
 		}
 		{
-			GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-			gbc_lblNewLabel.gridheight = 2;
-			gbc_lblNewLabel.gridwidth = 3;
-			gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-			gbc_lblNewLabel.gridx = 1;
-			gbc_lblNewLabel.gridy = 2;
-			frame.getContentPane().add(label, gbc_lblNewLabel);
+			GridBagConstraints gbc_lblImagen = new GridBagConstraints();
+			gbc_lblImagen.gridheight = 2;
+			gbc_lblImagen.gridwidth = 3;
+			gbc_lblImagen.insets = new Insets(0, 0, 5, 5);
+			gbc_lblImagen.gridx = 1;
+			gbc_lblImagen.gridy = 2;
+			frame.getContentPane().add(lblImagen, gbc_lblImagen);
 		}
 	}
 
-	private class BtnNewButtonActionListener implements ActionListener {
+	private class CargarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			JFileChooser fcAbrir = new JFileChooser();
 			int valorDevuelto = fcAbrir.showOpenDialog(frame);
@@ -119,12 +122,13 @@ public class Puzzle {
 					e.printStackTrace();
 				}
 				imagen = new ImageIcon(source);
-				label.setIcon(imagen);
+				Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(frame.getWidth(), frame.getHeight(), Image.SCALE_DEFAULT));
+				lblImagen.setIcon(icono);
 			}
 		}
 	}
 	
-	private class BtnNewButton_1ActionListener implements ActionListener {
+	private class MezclarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			Mezcla mezcla;
 
