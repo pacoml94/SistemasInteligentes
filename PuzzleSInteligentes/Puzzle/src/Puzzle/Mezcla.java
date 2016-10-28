@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -83,8 +84,12 @@ public class Mezcla extends JFrame {
                 if (i == 0 && j == 0) {
                 	negro = loadImage("cuadradonegro.png");
                 	image = createImage(new FilteredImageSource(negro.getSource(), new CropImageFilter(j * width / c, i * height / f, (width / c), height / f)));
-                    firstrec = new Rectangulo(image);
+                    
+                	int ancho = image.getHeight(getParent());
+                	int alto = image.getWidth(getParent());
+                	firstrec = new Rectangulo(image);
                     firstrec.setFirstRec();
+                    firstrec.setBounds(0, 0, ancho, alto);
                     rec.putClientProperty("position", new Point(i, j));
                     
                 } else {
@@ -95,8 +100,8 @@ public class Mezcla extends JFrame {
            
         }
         Collections.shuffle(rectangulos);
-        rectangulos.add(firstrec);
-        for (int i = 0; i < c*f; i++) {
+        //rectangulos.add(firstrec);
+        for (int i = 0; i < rectangulos.size(); i++) {
 
         	Rectangulo rec = rectangulos.get(i);
             contentPane.add(rec);
