@@ -122,6 +122,7 @@ public class Puzzle {
 					e.printStackTrace();
 				}
 				imagen = new ImageIcon(source);
+				//Cambio
 				Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(frame.getWidth(), frame.getHeight(), Image.SCALE_DEFAULT));
 				lblImagen.setIcon(icono);
 			}
