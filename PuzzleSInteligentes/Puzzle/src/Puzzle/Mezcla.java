@@ -26,7 +26,7 @@ import javax.swing.border.EmptyBorder;
 
 
 public class Mezcla extends JFrame {
-	//private BufferedImage source;
+	//private BufferedImage source; PRUEBA
 	private BufferedImage negro;
 	private ArrayList <Rectangulo> rectangulos;
 	private JPanel contentPane;
