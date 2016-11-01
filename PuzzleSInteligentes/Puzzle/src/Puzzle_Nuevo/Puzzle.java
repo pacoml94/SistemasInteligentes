@@ -25,6 +25,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
@@ -170,10 +171,8 @@ public class Puzzle extends java.awt.Component{
 			int height = source.getHeight();
 			Image image;
 
-			ArrayList<Rectangulo> rectangulos = new ArrayList();
+			ArrayList<Rectangulo> rectangulos = new ArrayList<>();
 
-			Rectangulo firstrec;
-			BufferedImage negro;
 			for (int i = 0; i < f; i++) {
 				for (int j = 0; j < c; j++) {
 					image = createImage(new FilteredImageSource(source.getSource(),
@@ -187,5 +186,6 @@ public class Puzzle extends java.awt.Component{
 
 			return rectangulos;
 		}
-	}
+		
+	}		
 }

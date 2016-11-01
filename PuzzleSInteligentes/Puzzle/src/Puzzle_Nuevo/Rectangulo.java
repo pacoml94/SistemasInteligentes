@@ -7,26 +7,26 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 public class Rectangulo extends JLabel{
-	private boolean firstRec;
-
-    public Rectangulo() {
-
-    }
-
+	private Image image;
+	
     public Rectangulo(Image image) {
-
         super(new ImageIcon(image));
+        this.image = image;
     }
 
- 
+    public Image getImage() {
+		return image;
+	}
 
-    public void setFirstRec() {
-        
-        firstRec = true;
-    }
+	public void setImage(Image image) {
+		this.image = image;
+	}
 
-    public boolean firstRec() {
-
-        return firstRec;
-    }
+	public int hashCode() {
+		
+		int hash = 1;
+		hash = hash*31 + image.hashCode();
+		
+		return hash;
+	}
 }
