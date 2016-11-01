@@ -100,7 +100,7 @@ public class Mezcla extends JFrame {
            
         }
         Collections.shuffle(rectangulos);
-        //rectangulos.add(firstrec);
+        rectangulos.add(firstrec);
         for (int i = 0; i < rectangulos.size(); i++) {
 
         	Rectangulo rec = rectangulos.get(i);
