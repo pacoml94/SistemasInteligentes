@@ -17,8 +17,11 @@ public class Rectangulo extends JLabel{
     }
 
  
-	public BufferedImage getImage() {
-		
+	public BufferedImage getImage() {	
 		return  image ;
+	}
+	
+	public int getID() {
+		return this.ID;
 	}
 }
