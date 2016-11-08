@@ -4,18 +4,10 @@ import java.awt.EventQueue;
 import java.awt.Image;
 
 import javax.swing.JFrame;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JSeparator;
-
-import com.sun.xml.internal.ws.api.Component;
-
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import java.awt.Color;
+import java.awt.Component;
 
-import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -25,35 +17,32 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
-import java.awt.image.WritableRaster;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
-import javax.swing.JLabel;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import javax.swing.JTextField;
+import javax.swing.JLabel;
 
-public class Puzzle extends java.awt.Component {
+public class Puzzle{
 
 	private JFrame frame;
-	private final JMenuBar menuBar = new JMenuBar();
-	private final JMenu mnArchivo = new JMenu("Archivo");
-	private final JMenuItem mntmAbrir = new JMenuItem("Abrir");
-	private final JSeparator separator = new JSeparator();
-	private final JMenuItem mntmSalir = new JMenuItem("Salir");
 	private final JPanel panel = new JPanel();
-	private final JButton btnCargarImagen1 = new JButton("Cargar imagen 1");
-	private final JButton btnCargarImagen2 = new JButton("Cargar imagen 2");
+	private final JButton btnCargarImagen = new JButton("Cargar Imagen 1");
+	private final JButton btnCargarImagen_1 = new JButton("Cargar Imagen 2");
+	private final JPanel panel_1 = new JPanel();
+	private final JButton btnComprobar = new JButton("Comprobar");
 	private BufferedImage source1, source2;
-	private ImageIcon image;
-	private final JButton btnComprobarImgenes = new JButton("Comprobar imágenes");
+	//private ImageIcon image;
 	private ArrayList<Rectangulo> imagen1, imagen2;
 	private int f, c;
-	private final JLabel lblNmeroDeFilas = new JLabel("Número de filas:");
-	private final JTextField txtFilas = new JTextField();
-	private final JLabel lblNmeroDeColumnas = new JLabel("Número de columnas");
-	private final JTextField txtColumnas = new JTextField();
+	private final JTextField textFilas = new JTextField();
+	private final JTextField textColumnas = new JTextField();
+	private final JLabel lblFilas = new JLabel("Filas:");
+	private final JLabel lblColumnas = new JLabel("Columnas:");
 	/**
 	 * Launch the application.
 	 */
@@ -75,94 +64,75 @@ public class Puzzle extends java.awt.Component {
 	 */
 	public Puzzle() {
 		initialize();
-		imagen1 = new ArrayList<>();
-		imagen2 = new ArrayList<>();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		txtColumnas.setBounds(233, 127, 86, 20);
-		txtColumnas.setColumns(10);
-		txtFilas.setBounds(233, 102, 86, 20);
-		txtFilas.setColumns(10);
+		textColumnas.setBounds(180, 42, 105, 26);
+		textColumnas.setColumns(10);
+		textFilas.setBounds(180, 0, 105, 26);
+		textFilas.setColumns(10);
 		frame = new JFrame();
-		frame.setBounds(100, 100, 500, 400);
+		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		{
-			frame.setJMenuBar(menuBar);
+			frame.getContentPane().add(panel, BorderLayout.NORTH);
 		}
 		{
-			menuBar.add(mnArchivo);
+			btnCargarImagen.addActionListener(new BtnCargarImagenActionListener());
+			panel.add(btnCargarImagen);
 		}
 		{
-			mnArchivo.add(mntmAbrir);
+			btnCargarImagen_1.addActionListener(new BtnCargarImagen_1ActionListener());
+			panel.add(btnCargarImagen_1);
 		}
 		{
-			mnArchivo.add(separator);
+			frame.getContentPane().add(panel_1, BorderLayout.CENTER);
 		}
 		{
-			mnArchivo.add(mntmSalir);
+			btnComprobar.setBounds(157, 103, 117, 23);
+			btnComprobar.addActionListener(new BtnComprobarActionListener());
+			panel_1.setLayout(null);
+			panel_1.add(btnComprobar);
 		}
 		{
-			frame.getContentPane().add(panel, BorderLayout.CENTER);
-		}
-		panel.setLayout(null);
-		{
-			btnCargarImagen1.addActionListener(new BtnCargarImagen1ActionListener());
-			btnCargarImagen1.setBounds(43, 42, 184, 23);
-			panel.add(btnCargarImagen1);
+			panel_1.add(textFilas);
 		}
 		{
-			btnCargarImagen2.setEnabled(false);
-			btnCargarImagen2.addActionListener(new BtnCargarImagen2ActionListener());
-			btnCargarImagen2.setBounds(290, 42, 172, 23);
-			panel.add(btnCargarImagen2);
+			panel_1.add(textColumnas);
 		}
 		{
-			btnComprobarImgenes.setEnabled(false);
-			btnComprobarImgenes.addActionListener(new BtnComprobarImgenesActionListener());
-			btnComprobarImgenes.setBounds(153, 172, 172, 23);
-			panel.add(btnComprobarImgenes);
+			lblFilas.setBounds(78, 6, 69, 20);
+			panel_1.add(lblFilas);
 		}
 		{
-			lblNmeroDeFilas.setBounds(114, 105, 87, 14);
-			panel.add(lblNmeroDeFilas);
-		}
-		{
-			panel.add(txtFilas);
-		}
-		{
-			lblNmeroDeColumnas.setBounds(114, 130, 105, 14);
-			panel.add(lblNmeroDeColumnas);
-		}
-		{
-			panel.add(txtColumnas);
+			lblColumnas.setBounds(78, 45, 87, 20);
+			panel_1.add(lblColumnas);
 		}
 	}
-	private class BtnCargarImagen1ActionListener implements ActionListener {
+
+	private class BtnCargarImagenActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			JFileChooser fcAbrir = new JFileChooser();
-			
+
 			int valpr = fcAbrir.showOpenDialog(frame);
-			
+
 			if(valpr == JFileChooser.APPROVE_OPTION) {
 				File archivo = fcAbrir.getSelectedFile();
-				
+
 				try {
 					source1 = ImageIO.read(archivo);
-					btnCargarImagen2.setEnabled(true);
+					btnCargarImagen_1.setEnabled(true);
 				} catch (IOException e) {
 					// TODO: handle exception
 					e.printStackTrace();
 				}
 			}
-			
 		}
 	}
-
-	private class BtnCargarImagen2ActionListener implements ActionListener {
+	private class BtnCargarImagen_1ActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			JFileChooser fcAbrir = new JFileChooser();
 
@@ -173,7 +143,7 @@ public class Puzzle extends java.awt.Component {
 
 				try {
 					source2 = ImageIO.read(archivo);
-					btnComprobarImgenes.setEnabled(true);
+					btnComprobar.setEnabled(true);
 				} catch (IOException e) {
 					// TODO: handle exception
 					e.printStackTrace();
@@ -181,64 +151,91 @@ public class Puzzle extends java.awt.Component {
 			}
 		}
 	}
-
-	private class BtnComprobarImgenesActionListener implements ActionListener {
-		
-		@SuppressWarnings("deprecation")
+	private class BtnComprobarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			
-			if(iguales(source1,source2)){
-				System.out.print("Las imagenes son iguales");
-				//imagen1 = cortar(source1);
-				imagen2 = cortar(source2);
-				
-				Imagen_Puzzle imagen_Puzzle = new Imagen_Puzzle(imagen2, f, c);
-				imagen_Puzzle.show(true);
-
-			}else System.out.print("Las imagenes no son iguales");
-			
+			f=Integer.parseInt(textFilas.getText());
+			c=Integer.parseInt(textColumnas.getText());
+			imagen1 = cortar(source1);
+			imagen2 = cortar(source2);
+			if(compare(imagen1, imagen2))System.out.print("Las imagenes son iguales ");
+			else System.out.print("Las imagenes no son iguales ");
 		}
-
 		private ArrayList<Rectangulo> cortar(BufferedImage source) {
 			int width = source.getWidth();
 			int height = source.getHeight();
-			Image image;
-			
-			f=Integer.parseInt(txtFilas.getText());
-			c=Integer.parseInt(txtColumnas.getText());
-
+			int widthRec = width/c;
+			int heightRec = height/f;
 			ArrayList<Rectangulo> rectangulos = new ArrayList<>();
-
+			//cortamos la imagen en el numero de filas y columnas indicado y la vamos guardando al array de rectangulos
 			for (int i = 0; i < f; i++) {
 				for (int j = 0; j < c; j++) {
-					image = createImage(new FilteredImageSource(source.getSource(),
-							new CropImageFilter(j * width / c, i * height / f, (width / c), height / f)));
-					Rectangulo rec = new Rectangulo(image);
-
+					BufferedImage image=new BufferedImage(widthRec, heightRec, source.getType());
+					Graphics2D g= image.createGraphics();
+					// gr.drawImage(img, 0, 0, anchoCelda, altoCelda, anchoCelda * y, altoCelda * x,
+					  //          anchoCelda * y + anchoCelda, altoCelda * x + altoCelda, null);
+					g.drawImage(image,0,0, widthRec, heightRec, widthRec*j, heightRec*i,
+					 widthRec*j+widthRec,heightRec*i+heightRec, null);
+					g.dispose();
+					Rectangulo rec= new Rectangulo (image);
 					rectangulos.add(rec);
+					
 				}
 
 			}
 
 			return rectangulos;
 		}
-		
-		private boolean iguales(BufferedImage img1, BufferedImage img2){
-			boolean equivale=false;
-			int alto, ancho;
-			if(img1.getHeight()==img2.getHeight() && img1.getWidth()==img2.getWidth()){
-				alto=img2.getHeight();
-				ancho=img2.getHeight();
-				
-				for(int i=0;i<alto;i++){
-					for(int j=0;j<ancho;j++){
-						if (img1.getRGB(i, j)==img2.getRGB(i, j)){
-							equivale=true;
+		private boolean compare(ArrayList<Rectangulo>imagen1, ArrayList<Rectangulo> imagen2){
+				boolean igual=false;
+				int cont=0;
+				for(int i=0;i<imagen1.size();i++){
+					for(int j=0;j<imagen2.size();j++){
+						if(iguales(imagen1.get(i).getImage(),imagen2.get(j).getImage())){
+							cont++;
+							j=imagen2.size();
+							
 						}
 					}
 				}
+				if(cont==(f*c)){
+					igual=true;
+						}
+				return igual;
 			}
-			return equivale;
-		}
-	}		
+		private boolean iguales(BufferedImage img1, BufferedImage img2){
+		      boolean equivale=false;
+		      int alto, ancho;
+		      //Primero comparamos que los tama�os de ambas imagenes sean iguales, 
+		      //en caso de que no lo sean, las imagenes ya no son iguales.
+
+		      if(img1.getHeight()==img2.getHeight() && img1.getWidth()==img2.getWidth()){
+		        alto=img2.getHeight();
+		        ancho=img2.getWidth();
+		       // System.out.println(alto);
+		       // System.out.println(ancho);
+		        //Recorremos todos los pixel para comprobar si las imagenes son iguales
+
+		        for(int i=0;i<alto;i++){
+		          for(int j=0;j<ancho;j++){
+		            if (img1.getRGB(j, i)==img2.getRGB(j, i)){
+		              equivale=true;
+		            System.out.print(img1.getRGB(j,i)<< 2);
+		              System.out.println(" "+img2.getRGB(j,i));
+		            // System.out.println(" Iguales");
+		            }else{
+		            	System.out.println("No iguales");
+		            	equivale=false;
+		            
+		            	i=alto;
+		            	j=ancho;
+		            	
+		            }
+		          }
+		        
+		        }
+		      }
+		      return equivale;
+		    }
+	}
 }
+

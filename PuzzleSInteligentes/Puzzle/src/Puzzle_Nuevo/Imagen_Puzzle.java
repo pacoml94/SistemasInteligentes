@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.sun.javafx.geom.transform.BaseTransform;
+//import com.sun.javafx.geom.transform.BaseTransform;
 
 public class Imagen_Puzzle extends JFrame {
 
@@ -32,7 +32,6 @@ public class Imagen_Puzzle extends JFrame {
 			}
 		});
 	}*/
-
 	/**
 	 * Create the frame.
 	 */
