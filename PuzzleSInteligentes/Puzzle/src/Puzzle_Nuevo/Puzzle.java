@@ -201,6 +201,7 @@ public class Puzzle{
 					igual=true;
 						}
 				return igual;
+				
 			}
 		private boolean iguales(BufferedImage img1, BufferedImage img2){
 		      boolean equivale=false;
