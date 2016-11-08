@@ -9,11 +9,11 @@ import javax.swing.JLabel;
 
 public class Rectangulo extends JLabel{
 	private  BufferedImage image;
+	private int ID;
 
-
-    public Rectangulo(BufferedImage image) {
-
+    public Rectangulo(BufferedImage image, int ID) {
         this.image=image;
+        this.ID = ID;
     }
 
  

@@ -176,7 +176,7 @@ public class Puzzle{
 					g.drawImage(image,0,0, widthRec, heightRec, widthRec*j, heightRec*i,
 					 widthRec*j+widthRec,heightRec*i+heightRec, null);
 					g.dispose();
-					Rectangulo rec= new Rectangulo (image);
+					Rectangulo rec= new Rectangulo (image, i);
 					rectangulos.add(rec);
 					
 				}
@@ -206,7 +206,7 @@ public class Puzzle{
 		private boolean iguales(BufferedImage img1, BufferedImage img2){
 		      boolean equivale=false;
 		      int alto, ancho;
-		      //Primero comparamos que los tamaños de ambas imagenes sean iguales, 
+		      //Primero comparamos que los tamaï¿½os de ambas imagenes sean iguales, 
 		      //en caso de que no lo sean, las imagenes ya no son iguales.
 
 		      if(img1.getHeight()==img2.getHeight() && img1.getWidth()==img2.getWidth()){
