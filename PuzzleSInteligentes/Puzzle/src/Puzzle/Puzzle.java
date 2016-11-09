@@ -28,6 +28,9 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 
 import javax.swing.JTextField;
+
+import com.sun.org.apache.bcel.internal.generic.NEW;
+
 import javax.swing.JLabel;
 
 public class Puzzle{
@@ -45,6 +48,7 @@ public class Puzzle{
 	private final JTextField textColumnas = new JTextField();
 	private final JLabel lblFilas = new JLabel("Filas:");
 	private final JLabel lblColumnas = new JLabel("Columnas:");
+	private boolean [] mov = new boolean[4];
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -76,6 +80,11 @@ public class Puzzle{
 		textFilas.setColumns(10);
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
+		
+		for (int i = 0; i < mov.length; i++) {
+			mov[i] = false;
+		}
+		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		{
 			frame.getContentPane().add(panel, BorderLayout.NORTH);
@@ -262,32 +271,67 @@ public class Puzzle{
 			}
 
 			System.out.println("Movimientos posibles ");
-
+			/*
+			 * mov[0]=arriba
+			 * mov[1]=abajo
+			 * mov[2]=izquierda
+			 * mov[3]=der
+			 */
 			//Fila Arriba
 			if(i==0){
-				if(j==0)
+				if(j==0) {
 					System.out.println("Derecha o Abajo");
-				else if(j==c-1)
+					mov[3] = mov[1] = true;
+				}
+				else if(j==c-1){
 					System.out.println("Iquierda o Abajo");
-				else System.out.println("Derecha, Abajo, Izquierda");
+					mov[2] = mov[1] = true;
+				}
+				else {
+					System.out.println("Derecha, Abajo, Izquierda");
+					mov[3] = mov[1] = mov[2] = true;
+				}
 
 				//Columna Izquierda	
 			}else if(j==0){
-				if(i==f-1)
+				if(i==f-1) {
 					System.out.println("Derecha o Arriba");
-				else System.out.println("Derecha, Arriba, Abajo");
+					mov[3] = mov[0] = true;
+				}
+				else {
+					System.out.println("Derecha, Arriba, Abajo");
+					mov[3] = mov[1] = mov[0] = true;
+				}
 
 
 				//Columna Derecha
 			}else if(j==c-1){
-				if(i==f-1)
+				if(i==f-1) {
 					System.out.println("Izquierda o Arriba");
-				else System.out.println("Izquierda, Arriba, Abajo");
+					mov[2] = mov[0] = true;
+				}
+					
+				else {
+					System.out.println("Izquierda, Arriba, Abajo");
+					mov[2] = mov[0] = mov[1] = true;
+				}
 				//Fila Abajo	
 			}else if(i==f-1){
 				System.out.println("Arriba, Izquierda,Derecha");
-
-			}else System.out.println("Todos son posibles");
+				mov[2] = mov[0] = mov[3] = true;				
+			}else {
+				System.out.println("Todos son posibles");
+				for (int j2 = 0; j2 < mov.length; j2++) {
+					mov[j2] = true;
+				}
+			}
+			imprimir();
+		}
+		
+		private void imprimir() {
+			for (int i = 0; i < mov.length; i++) {
+				System.out.println(mov[i]);
+			}
 		}
 	}
 }
