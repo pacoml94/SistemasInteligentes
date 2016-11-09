@@ -253,10 +253,10 @@ public class Puzzle{
 			int i=0, j=0;
 			for(int x=0;x<f;x++){
 				for(int y=0;y<c;y++){
-					if(img[x][y].getIdImage()==0)
-						//negro=new Point(x,y);
+					if(img[x][y].getIdImage()==0) {
 						i=x;
-					j=y;
+						j=y;
+					}
 				}
 
 			}
@@ -282,7 +282,7 @@ public class Puzzle{
 			}else if(j==c-1){
 				if(i==f-1)
 					System.out.println("Izquierda o Arriba");
-				else System.out.println("Izuierda, Arriba, Abajo");
+				else System.out.println("Izquierda, Arriba, Abajo");
 				//Fila Abajo	
 			}else if(i==f-1){
 				System.out.println("Arriba, Izquierda,Derecha");
