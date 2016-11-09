@@ -63,9 +63,9 @@ public class Puzzle {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		textColumnas.setBounds(180, 42, 105, 26);
+		textColumnas.setBounds(180, 69, 105, 26);
 		textColumnas.setColumns(10);
-		textFilas.setBounds(180, 0, 105, 26);
+		textFilas.setBounds(180, 18, 105, 26);
 		textFilas.setColumns(10);
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
@@ -85,7 +85,7 @@ public class Puzzle {
 			frame.getContentPane().add(panel_1, BorderLayout.CENTER);
 		}
 		{
-			btnComprobar.setBounds(157, 103, 117, 23);
+			btnComprobar.setBounds(157, 159, 117, 23);
 			btnComprobar.addActionListener(new BtnComprobarActionListener());
 			panel_1.setLayout(null);
 			panel_1.add(btnComprobar);
@@ -97,11 +97,11 @@ public class Puzzle {
 			panel_1.add(textColumnas);
 		}
 		{
-			lblFilas.setBounds(78, 6, 69, 20);
+			lblFilas.setBounds(78, 21, 69, 20);
 			panel_1.add(lblFilas);
 		}
 		{
-			lblColumnas.setBounds(78, 45, 87, 20);
+			lblColumnas.setBounds(78, 72, 87, 20);
 			panel_1.add(lblColumnas);
 		}
 		for (int i = 0; i < 4; i++) {
