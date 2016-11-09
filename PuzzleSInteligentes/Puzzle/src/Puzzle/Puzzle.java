@@ -28,9 +28,6 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 
 import javax.swing.JTextField;
-
-import com.sun.org.apache.bcel.internal.generic.NEW;
-
 import javax.swing.JLabel;
 
 public class Puzzle{
@@ -48,8 +45,8 @@ public class Puzzle{
 	private final JTextField textColumnas = new JTextField();
 	private final JLabel lblFilas = new JLabel("Filas:");
 	private final JLabel lblColumnas = new JLabel("Columnas:");
-	private boolean [] mov = new boolean[4];
-	
+	private boolean [] mov=new boolean[4];
+	private int a,b;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -80,11 +77,6 @@ public class Puzzle{
 		textFilas.setColumns(10);
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
-		
-		for (int i = 0; i < mov.length; i++) {
-			mov[i] = false;
-		}
-		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		{
 			frame.getContentPane().add(panel, BorderLayout.NORTH);
@@ -119,6 +111,9 @@ public class Puzzle{
 		{
 			lblColumnas.setBounds(78, 45, 87, 20);
 			panel_1.add(lblColumnas);
+		}
+		for(int i=0;i<4;i++){
+			mov[i]=false;
 		}
 	}
 	//boton cargar imagen izquierda
@@ -168,9 +163,14 @@ public class Puzzle{
 			c=Integer.parseInt(textColumnas.getText());
 			imagen1 = cortar(source1);
 			imagen2 = cortar(source2);
+			
+			
 			if(compare(imagen1, imagen2)){
 				System.out.println("Las imagenes son iguales ");
-				MovimientosPosibles(imagen2);
+				PosicionNegro();
+				MovimientosPosibles(a,b);
+				RealizarMovimiento();
+				MovimientosPosibles(a,b);
 				Mezcla mezcla = new Mezcla(imagen2, f,c);
 				mezcla.setVisible(true);
 			}else System.out.println("Las imagenes no son iguales ");
@@ -211,8 +211,8 @@ public class Puzzle{
 					for(int k=0;k<f;k++){
 						for(int z=0;z<c;z++){
 							if(iguales(imagen1[i][j].getImage(),imagen2[k][z].getImage())){
-								cont++;
 								imagen2[k][z].setIdImage(imagen1[i][j].getIdImage());
+								cont++;
 								z=c;
 								k=f;
 
@@ -231,7 +231,7 @@ public class Puzzle{
 		private boolean iguales(BufferedImage img1, BufferedImage img2){
 			boolean equivale=false;
 			int alto, ancho;
-			//Primero comparamos que los tama�os de ambas imagenes sean iguales, 
+			//Primero comparamos que los tamaños de ambas imagenes sean iguales, 
 			//en caso de que no lo sean, las imagenes ya no son iguales.
 
 			if(img1.getHeight()==img2.getHeight() && img1.getWidth()==img2.getWidth()){
@@ -258,82 +258,105 @@ public class Puzzle{
 			}
 			return equivale;
 		}
-		public void MovimientosPosibles(Rectangulo[][] img){
-			int i=0, j=0;
-			for(int x=0;x<f;x++){
-				for(int y=0;y<c;y++){
-					if(img[x][y].getIdImage()==0) {
-						i=x;
-						j=y;
-					}
-				}
-
-			}
-
-			System.out.println("Movimientos posibles ");
+		private void MovimientosPosibles(int i, int j){
+			
+			System.out.println("Movimientos posibles, "+i+", "+j);
 			/*
 			 * mov[0]=arriba
 			 * mov[1]=abajo
 			 * mov[2]=izquierda
-			 * mov[3]=der
+			 * mov[3]=derecha
 			 */
 			//Fila Arriba
 			if(i==0){
-				if(j==0) {
+				if(j==0){
 					System.out.println("Derecha o Abajo");
-					mov[3] = mov[1] = true;
+					mov[3]=mov[1]=true;
 				}
 				else if(j==c-1){
 					System.out.println("Iquierda o Abajo");
-					mov[2] = mov[1] = true;
+					mov[2]=mov[1]=true;
 				}
-				else {
+				else{
 					System.out.println("Derecha, Abajo, Izquierda");
-					mov[3] = mov[1] = mov[2] = true;
+					mov[3]=mov[1]=mov[2]=true;
 				}
 
 				//Columna Izquierda	
 			}else if(j==0){
-				if(i==f-1) {
+				if(i==f-1){
 					System.out.println("Derecha o Arriba");
-					mov[3] = mov[0] = true;
+					mov[3]=mov[0]=true;
 				}
-				else {
+				else{
 					System.out.println("Derecha, Arriba, Abajo");
-					mov[3] = mov[1] = mov[0] = true;
+					mov[3]=mov[0]=mov[1]=true;
 				}
 
 
 				//Columna Derecha
 			}else if(j==c-1){
-				if(i==f-1) {
+				if(i==f-1){
 					System.out.println("Izquierda o Arriba");
-					mov[2] = mov[0] = true;
+					mov[2]=mov[0]=true;
 				}
-					
-				else {
-					System.out.println("Izquierda, Arriba, Abajo");
-					mov[2] = mov[0] = mov[1] = true;
+				else{
+					System.out.println("Izuierda, Arriba, Abajo");
+					mov[2]=mov[0]=mov[1]=true;
 				}
 				//Fila Abajo	
 			}else if(i==f-1){
 				System.out.println("Arriba, Izquierda,Derecha");
-				mov[2] = mov[0] = mov[3] = true;				
-			}else {
+				mov[0]=mov[2]=mov[3]=true;
+			}else{
 				System.out.println("Todos son posibles");
-				for (int j2 = 0; j2 < mov.length; j2++) {
-					mov[j2] = true;
+				for(int x=0;x<4;x++) {
+					mov[x]=true;
 				}
+				
 			}
-			imprimir();
+			for(int x=0;x<4;x++) {
+				System.out.println(mov[x]);
+			}
+		}
+		public void RealizarMovimiento(){
+
+			if(mov[0]==true){
+				/*aux=imgAux[a-1][b];
+				imgAux[a-1][b]=imgAux[a][b];
+				imgAux[a][b]=aux;*/
+				a=a-1;
+			}
+			else if(mov[1]==true){
+				/*aux=imgAux[a+1][b];
+				imgAux[a+1][b]=imgAux[a][b];
+				imgAux[a][b]=aux;*/
+				a=a+1;
+			}
+			else if(mov[2]==true){
+				/*aux=imgAux[a][b-1];
+				imgAux[a][b-1]=imgAux[a][b];
+				imgAux[a][b]=aux;*/
+				b=b-1;
+			}
+			else if(mov[3]==true){
+				/*aux=imgAux[a][b+1];
+				imgAux[a][b+1]=imgAux[a][b];
+				imgAux[a][b]=aux;*/
+				b=b+1;
+			}
 		}
 		
-		private void imprimir() {
-			for (int i = 0; i < mov.length; i++) {
-				System.out.println(mov[i]);
+		private void PosicionNegro(){
+			for(int i=0;i<f;i++){
+				for(int j=0;j<c;j++){
+					if(imagen2[i][j].getIdImage()==0){
+						//negro=new Point(x,y);
+						a=i;
+						b=j;
+					}
+				}
 			}
 		}
 	}
 }
-
-
