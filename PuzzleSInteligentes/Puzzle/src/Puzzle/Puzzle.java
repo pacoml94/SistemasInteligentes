@@ -135,9 +135,9 @@ public class Puzzle {
 		public void actionPerformed(ActionEvent arg0) {
 			JFileChooser fcAbrir = new JFileChooser();
 
-			int valpr = fcAbrir.showOpenDialog(frame);
+			int valor = fcAbrir.showOpenDialog(frame);
 
-			if (valpr == JFileChooser.APPROVE_OPTION) {
+			if (valor == JFileChooser.APPROVE_OPTION) {
 				File archivo = fcAbrir.getSelectedFile();
 
 				try {
