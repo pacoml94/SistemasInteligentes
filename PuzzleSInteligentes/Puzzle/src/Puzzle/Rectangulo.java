@@ -1,12 +1,11 @@
 package Puzzle;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 
+@SuppressWarnings("serial")
 public class Rectangulo extends JLabel {
 	private BufferedImage image;
 	private int idImage;
