@@ -1,32 +1,32 @@
 package Puzzle;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
 public class Rectangulo extends JLabel{
-	private boolean firstRec;
+	private  BufferedImage image;
+	private int idImage;
 
-    public Rectangulo() {
 
+    public Rectangulo(BufferedImage image,int idImage) {
+    	super(new ImageIcon (image));
+        this.image=image;
+        this.idImage=idImage;
     }
-
-    public Rectangulo(Image image) {
-
-        super(new ImageIcon(image));
+    
+    public int getIdImage(){
+    	return idImage;
     }
-
+    public void setIdImage(int idImage){
+    	this.idImage=idImage;
+    }
  
-
-    public void setFirstRec() {
-        
-        firstRec = true;
-    }
-
-    public boolean firstRec() {
-
-        return firstRec;
-    }
+	public BufferedImage getImage() {
+		
+		return  image ;
+	}
 }
