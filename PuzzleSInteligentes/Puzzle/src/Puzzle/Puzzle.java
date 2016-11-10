@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -21,6 +22,8 @@ import java.awt.Graphics2D;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class Puzzle {
 
@@ -64,8 +67,10 @@ public class Puzzle {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		textColumnas.addFocusListener(new miFocusListener());
 		textColumnas.setBounds(180, 69, 105, 26);
 		textColumnas.setColumns(10);
+		textFilas.addFocusListener(new miFocusListener());
 		textFilas.setBounds(180, 18, 105, 26);
 		textFilas.setColumns(10);
 		frame = new JFrame();
@@ -360,4 +365,15 @@ public class Puzzle {
 			return p.getResuelto();
 		}
 	}
+	private class miFocusListener extends FocusAdapter {
+		@Override
+		public void focusGained(FocusEvent e) {
+			e.getComponent().setBackground(new Color(250, 250, 210));
+		}
+		@Override
+		public void focusLost(FocusEvent e) {
+			e.getComponent().setBackground(new Color(250, 250, 250));
+		}
+	}
+	
 }
