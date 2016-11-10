@@ -1,5 +1,6 @@
 package Puzzle;
 
+import Solucion.*;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -352,6 +353,11 @@ public class Puzzle {
 					}
 				}
 			}
+		}
+		
+		private boolean estaResuelto() {
+			Solucionar_Puzzle p = new Solucionar_Puzzle(imagen2);
+			return p.getResuelto();
 		}
 	}
 }
