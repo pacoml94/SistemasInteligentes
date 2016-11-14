@@ -11,6 +11,5 @@ public class Problema {
 		this.inicial = inicial;
 		this.eS = new EspacioEstados(inicial);
 	}
-	
-	
+		
 }
