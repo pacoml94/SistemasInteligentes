@@ -42,6 +42,7 @@ public class Puzzle {
 	private final JLabel lblColumnas = new JLabel("Columnas:");
 	private boolean[] mov = new boolean[4];
 	private int a, b;
+	private final JButton btnReconstruir = new JButton("Reconstruir");
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -91,7 +92,7 @@ public class Puzzle {
 			frame.getContentPane().add(panel_1, BorderLayout.CENTER);
 		}
 		{
-			btnComprobar.setBounds(157, 159, 117, 23);
+			btnComprobar.setBounds(30, 154, 117, 23);
 			btnComprobar.addActionListener(new BtnComprobarActionListener());
 			panel_1.setLayout(null);
 			panel_1.add(btnComprobar);
@@ -109,6 +110,11 @@ public class Puzzle {
 		{
 			lblColumnas.setBounds(78, 72, 87, 20);
 			panel_1.add(lblColumnas);
+		}
+		{
+			btnReconstruir.addActionListener(new BtnReconstruirActionListener());
+			btnReconstruir.setBounds(316, 154, 89, 23);
+			panel_1.add(btnReconstruir);
 		}
 		for (int i = 0; i < 4; i++) {
 			mov[i] = false;
@@ -361,8 +367,7 @@ public class Puzzle {
 		}
 		
 		private boolean estaResuelto() {
-			Solucionar_Puzzle p = new Solucionar_Puzzle(imagen2);
-			return p.getResuelto();
+			return false;
 		}
 	}
 	private class miFocusListener extends FocusAdapter {
@@ -375,5 +380,9 @@ public class Puzzle {
 			e.getComponent().setBackground(new Color(250, 250, 250));
 		}
 	}
-	
+	private class BtnReconstruirActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			Problema p = new Problema(imagen2);
+		}
+	}
 }
