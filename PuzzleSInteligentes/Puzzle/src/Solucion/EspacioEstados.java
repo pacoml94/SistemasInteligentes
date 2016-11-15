@@ -4,35 +4,31 @@ import Puzzle.Rectangulo;
 
 public class EspacioEstados {
 	
-	private Rectangulo [][] piezas;
-	private int profundidad;
+	private Estado e;
+	private Estado[]sucesores;
 	
 	
-	public EspacioEstados(Rectangulo [][] p) {
-		this.setPiezas(p);
-		this.profundidad = 0;
+	public EspacioEstados(Estado e) {
+		this.e=e;
+		this.sucesores=Sucesores(e);
+		}
+
+	public Estado getE() {
+		return e;
 	}
 
-	public int incrementarProfundidad() {
-		return profundidad++;
-	}
-	
-	public int getProfundidad() {
-		return profundidad;
+	public void setE(Estado e) {
+		this.e = e;
 	}
 
-	public void setProfundidad(int profundidad) {
-		this.profundidad = profundidad;
+	public Estado[] getSucesores() {
+		return sucesores;
 	}
 
-	public Rectangulo [][] getPiezas() {
-		return piezas;
+	public void setSucesores(Estado[] sucesores) {
+		this.sucesores = sucesores;
 	}
 
-	public void setPiezas(Rectangulo [][] piezas) {
-		this.piezas = piezas;
-	}
-	
 	public boolean esValido(Estado estado){
 	
 		return true;
@@ -41,17 +37,21 @@ public class EspacioEstados {
 		boolean objetivo=false;
 		Rectangulo [][] rec=e.getPiezas();
 		for(int i=0; i<rec.length; i++){
-			for (int j=0; i<rec.length; i++){
+			for (int j=0; i<rec[0].length; i++){
 				if(rec[i][j].getIdImage()==imgOriginal[i][j].getIdImage()){
 					objetivo = true;
 				}else
 					objetivo=false;
 					i=rec.length;
-					j=rec.length;
+					j=rec[0].length;
 			}
 		}
 		
 		return objetivo;
+	}
+	public Estado[] Sucesores(Estado e){
+		Estado[] sucesores=null;
+		return sucesores;
 	}
 
 }

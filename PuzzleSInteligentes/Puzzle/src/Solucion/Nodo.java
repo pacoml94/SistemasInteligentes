@@ -4,7 +4,9 @@ import Puzzle.Rectangulo;
 
 public class Nodo {
     
-  
+	private Estado estado;
+	
+
 	private int f; //distancia que queda para llegar al objetivo
 	private int costo; //coste que cuesta hacer ese movimiento en nuestro puzzle siempre es 1
 	private int h;  //
@@ -12,10 +14,19 @@ public class Nodo {
 	private int profundidad; //profundidad que ocupa ese nodo en el arbol
    
     
-    public Nodo() {
+    public Nodo(Estado e) {
+    	this.estado=e;
         
     }
 
+    public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+	
     public int getProfundidad() {
         return profundidad;
     }

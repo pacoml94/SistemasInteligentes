@@ -4,14 +4,15 @@ import Puzzle.Rectangulo;
 
 public class Problema {
 
-	@SuppressWarnings("unused")
+	
 	private Rectangulo [][] inicial;
-	@SuppressWarnings("unused")
+	private Estado e;
 	private EspacioEstados eS;
 	
 	public Problema(Rectangulo [][] inicial) {
 		this.inicial = inicial;
-		this.eS = new EspacioEstados(inicial);
+		e=new Estado(inicial);
+		this.eS = new EspacioEstados(e);
 	}
 		
 }
