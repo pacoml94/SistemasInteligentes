@@ -1,12 +1,16 @@
 package Solucion;
 
+import Puzzle.Rectangulo;
+
 public class Nodo {
     
-    private int profundidad;
-    private int id;
-    private int f;
-    private int costo;
-    private int h;
+  
+	private int f; //distancia que queda para llegar al objetivo
+	private int costo; //coste que cuesta hacer ese movimiento en nuestro puzzle siempre es 1
+	private int h;  //
+	private int id; //
+	private int profundidad; //profundidad que ocupa ese nodo en el arbol
+   
     
     public Nodo() {
         
