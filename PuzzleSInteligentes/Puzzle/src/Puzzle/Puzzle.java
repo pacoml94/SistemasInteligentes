@@ -366,6 +366,7 @@ public class Puzzle {
 			}
 		}
 		
+		@SuppressWarnings("unused")
 		private boolean estaResuelto() {
 			return false;
 		}
@@ -382,6 +383,7 @@ public class Puzzle {
 	}
 	private class BtnReconstruirActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
+			@SuppressWarnings("unused")
 			Problema p = new Problema(imagen2);
 		}
 	}
