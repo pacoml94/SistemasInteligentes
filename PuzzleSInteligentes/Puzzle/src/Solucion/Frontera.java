@@ -12,20 +12,19 @@ public class Frontera {
     
     public Frontera() {
         this.frontera = new ArrayList<>();
-        this.nodo=nodo;
-        
+        this.nodo=nodo;       
     }
     
     public List<Nodo> Insertar(Nodo nodo){ //Cambiar metodo en funcion del algoritmo
     	frontera.add(nodo);
-    	return frontera;
-    	
-    	
+    	return frontera;	
     }
+    
     public List<Nodo> Eliminar(){
     	frontera.remove(nodo);
     	return frontera;
     }
+    
     public boolean esVacia(){
     	return frontera.isEmpty();
     }

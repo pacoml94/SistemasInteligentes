@@ -75,6 +75,7 @@ public class Puzzle {
 		textFilas.setBounds(180, 18, 105, 26);
 		textFilas.setColumns(10);
 		frame = new JFrame();
+		frame.setResizable(false);
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		{
@@ -113,7 +114,7 @@ public class Puzzle {
 		}
 		{
 			btnReconstruir.addActionListener(new BtnReconstruirActionListener());
-			btnReconstruir.setBounds(316, 154, 89, 23);
+			btnReconstruir.setBounds(273, 154, 132, 23);
 			panel_1.add(btnReconstruir);
 		}
 		for (int i = 0; i < 4; i++) {

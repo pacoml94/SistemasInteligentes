@@ -11,7 +11,7 @@ public class EspacioEstados {
 	public EspacioEstados(Estado e) {
 		this.e=e;
 		this.sucesores=Sucesores(e);
-		}
+	}
 
 	public Estado getE() {
 		return e;
@@ -29,10 +29,10 @@ public class EspacioEstados {
 		this.sucesores = sucesores;
 	}
 
-	public boolean esValido(Estado estado){
-	
+	public boolean esValido(Estado estado){	
 		return true;
 	}
+	
 	public boolean esObjetivo(Estado e, Rectangulo[][]imgOriginal){
 		boolean objetivo=false;
 		Rectangulo [][] rec=e.getPiezas();
@@ -49,6 +49,7 @@ public class EspacioEstados {
 		
 		return objetivo;
 	}
+	
 	public Estado[] Sucesores(Estado e){
 		Estado[] sucesores=null;
 		return sucesores;
