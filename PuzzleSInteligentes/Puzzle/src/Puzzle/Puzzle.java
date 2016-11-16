@@ -26,7 +26,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
 public class Puzzle {
-//javi ñordo
+
 	private JFrame frame;
 	private final JPanel panel = new JPanel();
 	private final JButton btnCargarImagen = new JButton("Cargar Imagen 1");
