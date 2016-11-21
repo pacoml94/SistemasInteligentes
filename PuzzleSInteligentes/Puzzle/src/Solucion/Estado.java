@@ -14,5 +14,5 @@ public class Estado {
 	public Rectangulo[][] getPiezas(){
 		return piezas;
 	}
-
+	
 }

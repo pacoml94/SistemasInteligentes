@@ -384,8 +384,8 @@ public class Puzzle {
 	}
 	private class BtnReconstruirActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			@SuppressWarnings("unused")
-			Problema p = new Problema(imagen2);
+			Estado e=new Estado(imagen2);
+			Problema prob = new Problema(new EspacioEstados(e,imagen1), e);
 		}
 	}
 }

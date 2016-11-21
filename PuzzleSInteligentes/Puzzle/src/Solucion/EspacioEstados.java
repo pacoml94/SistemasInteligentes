@@ -1,16 +1,18 @@
 package Solucion;
 
 import Puzzle.Rectangulo;
+import Puzzle.Puzzle;
 
 public class EspacioEstados {
 	
 	private Estado e;
 	private Estado[]sucesores;
+	private Rectangulo[][]imgOriginal;
 	
-	
-	public EspacioEstados(Estado e) {
+	public EspacioEstados(Estado e, Rectangulo[][]imgOriginal) {
 		this.e=e;
 		this.sucesores=Sucesores(e);
+		this.imgOriginal=imgOriginal;
 	}
 
 	public Estado getE() {
@@ -25,15 +27,15 @@ public class EspacioEstados {
 		return sucesores;
 	}
 
-	public void setSucesores(Estado[] sucesores) {
+	/*public void setSucesores(Estado[] sucesores) {
 		this.sucesores = sucesores;
-	}
+	}*/
 
-	public boolean esValido(Estado estado){	
+	/*public boolean esValido(Estado estado){	
 		return true;
-	}
+	}*/
 	
-	public boolean esObjetivo(Estado e, Rectangulo[][]imgOriginal){
+	public boolean esObjetivo(Estado e){
 		boolean objetivo=false;
 		Rectangulo [][] rec=e.getPiezas();
 		for(int i=0; i<rec.length; i++){

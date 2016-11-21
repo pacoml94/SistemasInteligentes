@@ -6,17 +6,23 @@ public class Nodo {
     
 	private Estado estado;
 	
-
-	private int f; //distancia que queda para llegar al objetivo
+	private Nodo padre;
+	private int valor; 
 	private int costo; //coste que cuesta hacer ese movimiento en nuestro puzzle siempre es 1
 	private int h;  //
 	private int id; //
 	private int profundidad; //profundidad que ocupa ese nodo en el arbol
    
     
-    public Nodo(Estado e) {
+    public Nodo(Nodo padre, Estado e, int prof, int costo, int valor) {
     	this.estado=e;
-        
+        this.padre=padre;
+        this.profundidad=prof;
+        this.costo=costo;
+        this.valor=valor;
+    }
+    public Nodo(){
+    	
     }
 
     public Estado getEstado() {
@@ -43,12 +49,12 @@ public class Nodo {
         this.id = id;
     }
 
-    public int getF() {
-        return f;
+    public int getValor() {
+        return valor;
     }
 
-    public void setF(int f) {
-        this.f = f;
+    public void setValor(int valor) {
+        this.valor = valor;
     }
 
     public int getCosto() {

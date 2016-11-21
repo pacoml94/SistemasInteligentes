@@ -11,12 +11,18 @@ public class Frontera {
     private Nodo nodo;
     
     public Frontera() {
-        this.frontera = new ArrayList<>();
-        this.nodo=nodo;       
+        this.frontera = new ArrayList<>();  
     }
     
     public List<Nodo> Insertar(Nodo nodo){ //Cambiar metodo en funcion del algoritmo
-    	frontera.add(nodo);
+    	this.nodo=nodo;
+    	if (frontera.isEmpty()) frontera.add(nodo);
+    	else{
+    		for(int i=0;i<frontera.size();i++){
+    			if(nodo.getValor() < frontera.get(i).getValor()) frontera.add(i,nodo);
+    		}
+    	}
+    	System.out.println(System.nanoTime());
     	return frontera;	
     }
     
