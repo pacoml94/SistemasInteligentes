@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 public class Mezcla extends JFrame {
 
 	private JPanel panel;
-//
+
 	public Mezcla(Rectangulo[][] img, int f, int c) {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
