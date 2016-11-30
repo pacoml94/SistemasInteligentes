@@ -19,6 +19,7 @@ public class Nodo {
         this.profundidad=prof;
         this.costo=costo;
         this.valor=valor;
+        this.h=calcularHeuristica();
     }
     public Nodo(){
     	
@@ -70,6 +71,16 @@ public class Nodo {
 
     public void setH(int h) {
         this.h = h;
+    }
+    public int calcularHeuristica(){
+    	int id=0, heu=0;
+    	for(int i=0;i<estado.getPiezas().length;i++){
+    		for(int j=0;j<estado.getPiezas()[0].length;j++){
+    			if(estado.getPiezas()[i][j].getIdImage()!=id) heu++;
+    			id++;
+    		}
+    	}
+    	return heu;
     }
 
 }

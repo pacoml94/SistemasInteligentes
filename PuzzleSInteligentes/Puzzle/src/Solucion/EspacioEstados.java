@@ -2,6 +2,7 @@ package Solucion;
 
 import Puzzle.Rectangulo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Puzzle.Puzzle;
@@ -56,7 +57,7 @@ public class EspacioEstados {
 	}
 	
 	public List<Estado> Sucesores(Estado estado){
-		List<Estado> sucesores=null;
+		List<Estado> sucesores= new ArrayList<>();
 		this.e=estado;
 		boolean[] mov;
 		PosicionNegro();
