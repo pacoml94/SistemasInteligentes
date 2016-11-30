@@ -14,6 +14,10 @@ public class Frontera {
         this.frontera = new ArrayList<>();  
     }
     
+    public void insertarLista(List front){
+    	this.frontera=front;
+    }
+    
     public List<Nodo> Insertar(Nodo nodo){ //Cambiar metodo en funcion del algoritmo
     	this.nodo=nodo;
     	if (frontera.isEmpty()) frontera.add(nodo);
@@ -34,4 +38,13 @@ public class Frontera {
     public boolean esVacia(){
     	return frontera.isEmpty();
     }
+
+	public List<Nodo> getFrontera() {
+		return frontera;
+	}
+
+	public void setFrontera(List<Nodo> frontera) {
+		this.frontera = frontera;
+	}
+    
 }

@@ -273,7 +273,6 @@ public class Puzzle {
 		}
 
 		private void MovimientosPosibles(int i, int j) {
-
 			System.out.println("Movimientos posibles en la posicion " + i + "," + j);
 			/*
 			 * mov[0]=arriba mov[1]=abajo mov[2]=izquierda mov[3]=derecha

@@ -5,7 +5,6 @@ import Puzzle.Rectangulo;
 public class Nodo {
     
 	private Estado estado;
-	
 	private Nodo padre;
 	private int valor; 
 	private int costo; //coste que cuesta hacer ese movimiento en nuestro puzzle siempre es 1

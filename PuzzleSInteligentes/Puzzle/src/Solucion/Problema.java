@@ -1,5 +1,7 @@
 package Solucion;
 
+import java.util.List;
+
 import Puzzle.Rectangulo;
 
 public class Problema {
@@ -40,6 +42,10 @@ public class Problema {
 	}
 	public boolean estadoMeta(Estado estado){
 		return eS.esObjetivo(estado);
+	}
+	public List<Estado> Sucesores(Estado estado){
+		List<Estado> LS=eS.Sucesores(estado);
+		return LS;
 	}
 	
 		
