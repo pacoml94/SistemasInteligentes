@@ -113,6 +113,7 @@ public class Puzzle {
 			panel_1.add(lblColumnas);
 		}
 		{
+			btnReconstruir.setEnabled(false);
 			btnReconstruir.addActionListener(new BtnReconstruirActionListener());
 			btnReconstruir.setBounds(273, 154, 132, 23);
 			panel_1.add(btnReconstruir);
@@ -180,6 +181,8 @@ public class Puzzle {
 				MovimientosPosibles(a, b);
 				Mezcla mezcla = new Mezcla(imagen2, f, c);
 				mezcla.setVisible(true);
+				btnComprobar.setEnabled(false);
+				btnReconstruir.setEnabled(true);
 			} else
 				System.out.println("Las imagenes no son iguales ");
 		}
