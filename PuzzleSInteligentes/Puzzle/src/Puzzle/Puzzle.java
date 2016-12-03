@@ -181,6 +181,7 @@ public class Puzzle {
 				MovimientosPosibles(a, b);
 				Mezcla mezcla = new Mezcla(imagen2, f, c);
 				mezcla.setVisible(true);
+				//Manejador de botones
 				btnComprobar.setEnabled(false);
 				btnReconstruir.setEnabled(true);
 			} else
