@@ -1,12 +1,22 @@
 package Puzzle;
 import java.util.List;
 
+import Solucion.EspacioEstados;
 import Solucion.Estado;
 import Solucion.Frontera;
 import Solucion.Nodo;
 import Solucion.Problema;
 
 public class Algoritmo {
+	private EspacioEstados eS;
+	private Estado e;
+	public Algoritmo(EspacioEstados eS, Estado e){
+		this.eS=eS;
+		this.e=e;
+		Problema prob=new Problema(eS, e);
+		boolean solucion = Busqueda(prob, 0, 9999, 1);
+	}
+	
 	public boolean BusquedaAcotada(Problema prob, int estrategia, int prof_max){
 		Frontera front=new Frontera();
 		List<Estado> LS;
