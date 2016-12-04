@@ -35,11 +35,8 @@ public class Algoritmo {
 				//front.insertarLista(LN);
 			}
 		}
-		//Resultado
-		//if(solucion)
 		
-		
-		return true;
+		return solucion;
 	}
 	
 	public boolean Busqueda(Problema prob, int estrategia, int prof_max, int prof_inc){

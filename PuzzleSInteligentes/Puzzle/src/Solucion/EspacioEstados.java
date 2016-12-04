@@ -80,18 +80,22 @@ public class EspacioEstados {
 			aux=piezas[a-1][b];
 			piezas[a-1][b]=piezas[a][b];
 			piezas[a][b]=aux;
+			break;
 		case 1: //abajo
 			aux=piezas[a+1][b];
 			piezas[a+1][b]=piezas[a][b];
 			piezas[a][b]=aux;
+			break;
 		case 2: //izquierda
 			aux=piezas[a][b-1];
 			piezas[a][b-1]=piezas[a][b];
 			piezas[a][b]=aux;
+			break;
 		case 3: //derecha
 			aux=piezas[a][b+1];
 			piezas[a][b+1]=piezas[a][b];
 			piezas[a][b]=aux;
+			break;
 		}
 		return estadoNuevo=new Estado(piezas);
 	}

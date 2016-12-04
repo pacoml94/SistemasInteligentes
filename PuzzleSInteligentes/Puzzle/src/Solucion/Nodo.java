@@ -8,8 +8,8 @@ public class Nodo {
 	private Nodo padre;
 	private int valor; 
 	private int costo; //coste que cuesta hacer ese movimiento en nuestro puzzle siempre es 1
-	private int h;  //
-	private int id; //
+	private int h;  //Numero de nodos que faltan para llegar al estado objetivo
+	private int id; //Identificador del nodo
 	private int profundidad; //profundidad que ocupa ese nodo en el arbol
    
     
