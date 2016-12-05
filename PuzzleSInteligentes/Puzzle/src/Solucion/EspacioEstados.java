@@ -15,7 +15,6 @@ public class EspacioEstados {
 	
 	public EspacioEstados(Estado e, Rectangulo[][]imgOriginal) {
 		this.e=e;
-		this.sucesores=Sucesores(e);
 		this.imgOriginal=imgOriginal;
 	}
 

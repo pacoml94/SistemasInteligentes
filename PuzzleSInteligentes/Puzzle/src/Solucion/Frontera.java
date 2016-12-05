@@ -21,16 +21,22 @@ public class Frontera {
     public List<Nodo> Insertar(Nodo nodo){ //Cambiar metodo en funcion del algoritmo
     	long tiempo_inicial, tiempo_final;
     	this.nodo=nodo;
-    	
-    	tiempo_inicial = System.currentTimeMillis();
+    	boolean insertado = false;
+    	tiempo_inicial = System.nanoTime();
     	if (frontera.isEmpty()) frontera.add(nodo);
     	else{
-    		for(int i=0;i<frontera.size();i++){
-    			if(nodo.getValor() < frontera.get(i).getValor()) frontera.add(i,nodo);
+    		for(int i=0;i<frontera.size()&&!insertado;i++){
+    			if(nodo.getValor() < frontera.get(i).getValor()){
+    				frontera.add(i,nodo);
+    				insertado=true;
+    			}else if(i+1==frontera.size()){
+    				frontera.add(i+1,nodo);
+    				insertado=true;
+    			}
     		}
     	}
 
-    	tiempo_final = System.currentTimeMillis();
+    	tiempo_final = System.nanoTime();
     	
     	System.out.printf("Tiempo de insercion del nodo %d = %d\n", nodo.getId(), (tiempo_final - tiempo_inicial));
     	

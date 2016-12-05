@@ -10,33 +10,43 @@ import Solucion.Problema;
 public class Algoritmo {
 	private EspacioEstados eS;
 	private Estado e;
+	private Frontera front;
 	public Algoritmo(EspacioEstados eS, Estado e){
 		this.eS=eS;
 		this.e=e;
+		front=new Frontera();
 		Problema prob=new Problema(eS, e);
-		Busqueda(prob, 0, 9999, 1);
+		Busqueda(prob, 2, 9999, 1);
 	}
 	
 	public boolean BusquedaAcotada(Problema prob, int estrategia, int prof_max){
-		int id = 0;
-		Frontera front=new Frontera();
+		int id = 1;
 		List<Estado> LS;
 		List<Nodo> LN;
 		Nodo n_actual;
-		Nodo n_inicial=new Nodo(id , null, prob.getE(), 0);
+		Nodo n_inicial=new Nodo(prob.getE());
 		front.Insertar(n_inicial);
 		boolean solucion=false;
 		while(!solucion && !front.esVacia()){
 			n_actual=SeleccionaNodo(front);
 			if(prob.estadoMeta(n_actual.getEstado())){
+				System.out.println("Puzzle resuelto");
 				solucion=true;
 			}else{
 				LS=prob.Sucesores(n_actual.getEstado());
 				//Vamos creando un nodo por cada sucesor
 				for(int i=0;i<LS.size();i++){
-					id++;
-					Nodo nuevoNodo=new Nodo(id, n_actual, LS.get(i), CalcularValor(n_actual, estrategia));
-					front.Insertar(nuevoNodo); //Insertamos cada nodo en la frontera que se va ordenando por su valor
+					if(n_actual.getPadre()!=null){
+						if(!LS.get(i).equals(n_actual.getPadre().getEstado())){
+							Nodo nuevoNodo=new Nodo(id, n_actual, LS.get(i), CalcularValor(n_actual, estrategia));
+							front.Insertar(nuevoNodo); //Insertamos cada nodo en la frontera que se va ordenando por su valor
+							id++;
+						}
+					}else{
+						Nodo nuevoNodo=new Nodo(id, n_actual, LS.get(i), CalcularValor(n_actual, estrategia));
+						front.Insertar(nuevoNodo); //Insertamos cada nodo en la frontera que se va ordenando por su valor
+						id++;
+					}
 				}
 			}
 		}

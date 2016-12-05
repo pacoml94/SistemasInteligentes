@@ -7,10 +7,10 @@ public class Nodo {
 	private Estado estado;
 	private Nodo padre;
 	private int valor; 
-	private int costo = 0; //coste que cuesta hacer ese movimiento en nuestro puzzle siempre es 1
+	private int costo; //coste que cuesta hacer ese movimiento en nuestro puzzle siempre es 1
 	//private int h;  //Numero de nodos que faltan para llegar al estado objetivo
 	//private int id; //Identificador del nodo
-	private int profundidad=0; //profundidad que ocupa ese nodo en el arbol
+	private int profundidad; //profundidad que ocupa ese nodo en el arbol
    
     
     public Nodo(int id, Nodo padre, Estado e, int valor) {
@@ -22,9 +22,21 @@ public class Nodo {
         this.valor=valor;
         //this.h=calcularHeuristica();
     }
-   /* public Nodo(){
-    	
-    }*/
+    public Nodo(Estado e){
+    	id=0;
+    	this.estado=e;
+    	valor=0;
+    	costo=0;
+    	padre=null;
+    	profundidad=0;
+    }
+    
+    public Nodo getPadre() {
+		return padre;
+	}
+	public void setPadre(Nodo padre) {
+		this.padre = padre;
+	}
 
     public Estado getEstado() {
 		return estado;

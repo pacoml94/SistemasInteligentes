@@ -324,9 +324,6 @@ public class Puzzle {
 				}
 
 			}
-			for (int x = 0; x < 4; x++) {
-				System.out.println(mov[x]);
-			}
 		}
 
 		public void RealizarMovimiento() {
