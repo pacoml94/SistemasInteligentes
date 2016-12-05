@@ -97,7 +97,10 @@ public class EspacioEstados {
 			piezas[a][b]=aux;
 			break;
 		}
-		return estadoNuevo=new Estado(piezas);
+		
+		estadoNuevo = new Estado(piezas);
+		
+		return estadoNuevo;
 	}
 	
 	public void PosicionNegro(){
