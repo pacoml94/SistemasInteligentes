@@ -14,7 +14,7 @@ public class Frontera {
         this.frontera = new ArrayList<>();  
     }
     
-    public void insertarLista(List front){
+    public void insertarLista(List<Nodo> front){
     	this.frontera=front;
     }
     
@@ -49,9 +49,4 @@ public class Frontera {
 	public List<Nodo> getFrontera() {
 		return frontera;
 	}
-
-	public void setFrontera(List<Nodo> frontera) {
-		this.frontera = frontera;
-	}
-    
 }

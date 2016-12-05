@@ -3,27 +3,28 @@ package Solucion;
 import Puzzle.Rectangulo;
 
 public class Nodo {
-    
+    private int id;
 	private Estado estado;
 	private Nodo padre;
 	private int valor; 
-	private int costo; //coste que cuesta hacer ese movimiento en nuestro puzzle siempre es 1
-	private int h;  //Numero de nodos que faltan para llegar al estado objetivo
-	private int id; //Identificador del nodo
-	private int profundidad; //profundidad que ocupa ese nodo en el arbol
+	private int costo = 0; //coste que cuesta hacer ese movimiento en nuestro puzzle siempre es 1
+	//private int h;  //Numero de nodos que faltan para llegar al estado objetivo
+	//private int id; //Identificador del nodo
+	private int profundidad=0; //profundidad que ocupa ese nodo en el arbol
    
     
-    public Nodo(Nodo padre, Estado e, int prof, int costo, int valor) {
+    public Nodo(int id, Nodo padre, Estado e, int valor) {
+    	this.id=id;
     	this.estado=e;
         this.padre=padre;
-        this.profundidad=prof;
-        this.costo=costo;
+        this.profundidad=padre.getProfundidad()+1;
+        this.costo=padre.getCosto()+1;
         this.valor=valor;
-        this.h=calcularHeuristica();
+        //this.h=calcularHeuristica();
     }
-    public Nodo(){
+   /* public Nodo(){
     	
-    }
+    }*/
 
     public Estado getEstado() {
 		return estado;
@@ -40,15 +41,6 @@ public class Nodo {
     public void setProfundidad(int profundidad) {
         this.profundidad = profundidad;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public int getValor() {
         return valor;
     }
@@ -64,14 +56,14 @@ public class Nodo {
     public void setCosto(int costo) {
         this.costo = costo;
     }
+    
+    public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public int getH() {
-        return h;
-    }
-
-    public void setH(int h) {
-        this.h = h;
-    }
     public int calcularHeuristica(){
     	int id=0, heu=0;
     	for(int i=0;i<estado.getPiezas().length;i++){
