@@ -6,23 +6,12 @@ import Puzzle.Rectangulo;
 
 public class Problema {
 
-	
-	private Rectangulo [][] inicial;
 	private Estado e;
 	private EspacioEstados eS;
 	
 	public Problema(EspacioEstados eS, Estado e) {
-		this.inicial = inicial;
 		this.e=e;
 		this.eS=eS;
-	}
-	
-	public Rectangulo[][] getInicial() {
-		return inicial;
-	}
-
-	public void setInicial(Rectangulo[][] inicial) {
-		this.inicial = inicial;
 	}
 
 	public Estado getE() {

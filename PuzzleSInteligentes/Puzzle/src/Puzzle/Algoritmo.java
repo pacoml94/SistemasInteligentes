@@ -29,11 +29,11 @@ public class Algoritmo {
 		boolean solucion=false;
 		while(!solucion && !front.esVacia()){
 			n_actual=SeleccionaNodo(front);
-			if(prob.estadoMeta(n_actual.getEstado())){
+			if(eS.esObjetivo(n_actual.getEstado())){
 				System.out.println("Puzzle resuelto");
 				solucion=true;
 			}else{
-				LS=prob.Sucesores(n_actual.getEstado());
+				LS=eS.Sucesores(n_actual.getEstado());
 				//Vamos creando un nodo por cada sucesor
 				for(int i=0;i<LS.size();i++){
 					if(n_actual.getPadre()!=null){
@@ -65,23 +65,17 @@ public class Algoritmo {
 		}
 	}
 	
-	public int CalcularValor(Nodo padre, int estrategia){
+	public int CalcularValor(Nodo nodo, int estrategia){
 		int valor=0;
 		if(estrategia == 1){
-			//valor=padre.getProfundidad() +1;
-			valor=padre.getH();
+			valor=nodo.getProfundidad() +1;
+			//valor=nodo.getH()+nodo.getCosto();
 		}else if(estrategia == 2){
-			valor=padre.getCosto()+1;
+			valor=nodo.getCosto()+1;
 		}else if(estrategia == 3){
-			valor=padre.getProfundidad() * (-1);
+			valor=nodo.getProfundidad() * (-1);
 		}
 		return valor;
-	}
-	
-	public List<Nodo> CreaListaNodosArbol(List<Estado> LS, Nodo n_actual, int prof_max, int estrategia){
-		List<Nodo> LN=null;
-		
-		return LN;
 	}
 	
 	public Nodo SeleccionaNodo(Frontera front){

@@ -8,62 +8,39 @@ import java.util.List;
 import Puzzle.Puzzle;
 
 public class EspacioEstados {
-	private Estado e;
-	private List<Estado> sucesores;
-	private Rectangulo[][]imgOriginal;
-	private int a,b;
-	
-	public EspacioEstados(Estado e, Rectangulo[][]imgOriginal) {
-		this.e=e;
-		this.imgOriginal=imgOriginal;
-	}
-
-	public Estado getE() {
-		return e;
-	}
-
-	public void setE(Estado e) {
-		this.e = e;
-	}
-
-	public List<Estado> getSucesores() {
-		return sucesores;
-	}
-
-	/*public void setSucesores(Estado[] sucesores) {
-		this.sucesores = sucesores;
-	}*/
-
-	/*public boolean esValido(Estado estado){	
-		return true;
-	}*/
+	//private List<Estado> sucesores;
 	
 	public boolean esObjetivo(Estado e){
-		boolean objetivo=false;
+		int cont=0;
+		boolean solucion=true;
 		Rectangulo [][] rec=e.getPiezas();
+		int [][] objetivo=new int[rec.length][rec[0].length];
 		for(int i=0; i<rec.length; i++){
-			for (int j=0; i<rec[0].length; i++){
-				if(rec[i][j].getIdImage()==imgOriginal[i][j].getIdImage()){
-					objetivo = true;
-				}else
-					objetivo=false;
-					i=rec.length;
-					j=rec[0].length;
+			for (int j=0; j<rec[0].length; j++){
+				objetivo[i][j]=cont;
+				cont++;
 			}
 		}
 		
-		return objetivo;
+		for(int i=0; i<rec.length; i++){
+			for (int j=0; j<rec[0].length; j++){
+				if(rec[i][j].getIdImage()!=objetivo[i][j]){
+					solucion=false;
+				}
+			}
+		}
+		return solucion;
 	}
 	
 	public List<Estado> Sucesores(Estado estado){
 		List<Estado> sucesores= new ArrayList<>();
-		this.e=estado;
-		boolean[] mov;
-		PosicionNegro();
-		mov=MovimientosPosibles(a,b);
+		Rectangulo[][] piezas=CopiarMatriz(estado.getPiezas());
+		int [] posicionNegro=PosicionNegro(estado.getPiezas());
+		boolean[] mov=MovimientosPosibles(estado.getPiezas(), posicionNegro);
+		
 		for(int i=0;i<mov.length;i++){
 			if(mov[i]){
-				Estado estadoNuevo=RealizarMovimiento(estado.getPiezas(), mov, i);
+				Estado estadoNuevo=RealizarMovimiento(piezas, i, posicionNegro);
 				sucesores.add(estadoNuevo);
 			}
 		}
@@ -71,29 +48,31 @@ public class EspacioEstados {
 		return sucesores;
 	}
 	
-	public Estado RealizarMovimiento(Rectangulo[][] piezas, boolean[] mov, int i){
+	public Estado RealizarMovimiento(Rectangulo[][] piezas, int i, int[]posicionNegro){
+		int x=posicionNegro[0];
+		int y=posicionNegro[1];
 		Estado estadoNuevo;
 		Rectangulo aux;
 		switch(i){
 		case 0: //arriba
-			aux=piezas[a-1][b];
-			piezas[a-1][b]=piezas[a][b];
-			piezas[a][b]=aux;
+			aux=piezas[x-1][y];
+			piezas[x-1][y]=piezas[x][y];
+			piezas[x][y]=aux;
 			break;
 		case 1: //abajo
-			aux=piezas[a+1][b];
-			piezas[a+1][b]=piezas[a][b];
-			piezas[a][b]=aux;
+			aux=piezas[x+1][y];
+			piezas[x+1][y]=piezas[x][y];
+			piezas[x][y]=aux;
 			break;
 		case 2: //izquierda
-			aux=piezas[a][b-1];
-			piezas[a][b-1]=piezas[a][b];
-			piezas[a][b]=aux;
+			aux=piezas[x][y-1];
+			piezas[x][y-1]=piezas[x][y];
+			piezas[x][y]=aux;
 			break;
 		case 3: //derecha
-			aux=piezas[a][b+1];
-			piezas[a][b+1]=piezas[a][b];
-			piezas[a][b]=aux;
+			aux=piezas[x][y+1];
+			piezas[x][y+1]=piezas[x][y];
+			piezas[x][y]=aux;
 			break;
 		}
 		
@@ -102,59 +81,48 @@ public class EspacioEstados {
 		return estadoNuevo;
 	}
 	
-	public void PosicionNegro(){
-		for (int i = 0; i < e.getPiezas().length; i++) {
-			for (int j = 0; j < e.getPiezas()[0].length; j++) {
-				if (e.getPiezas()[i][j].getIdImage() == 0) {
-					a = i;
-					b = j;
+	public int[] PosicionNegro(Rectangulo[][] piezas){
+		int[]posicion=new int[2];
+		for (int i = 0; i < piezas.length; i++) {
+			for (int j = 0; j < piezas[0].length; j++) {
+				if (piezas[i][j].getIdImage() == 0) {
+					posicion[0] = i;
+					posicion[1]= j;
 				}
 			}
 		}
+		return posicion;
 	}
-	public boolean[] MovimientosPosibles(int i, int j){
+	public boolean[] MovimientosPosibles(Rectangulo[][]piezas, int[] posicionNegro){
 		boolean[] mov=new boolean[4];
-		int f=e.getPiezas().length;
-		int c=e.getPiezas()[0].length;
-		
+		int x=posicionNegro[0];
+		int y=posicionNegro[1];
+		for(int i=0;i<mov.length;i++){
+			mov[i]=true;
+		}
 		/*
 		 * mov[0]=arriba mov[1]=abajo mov[2]=izquierda mov[3]=derecha
+		 * 
 		 */
-		// Fila Arriba
-		if (i == 0) {
-			if (j == 0) {
-				mov[3] = mov[1] = true;
-			} else if (j == c - 1) {
-				mov[2] = mov[1] = true;
-			} else {
-				mov[3] = mov[1] = mov[2] = true;
-			}
-
-			// Columna Izquierda
-		} else if (j == 0) {
-			if (i == f - 1) {
-				mov[3] = mov[0] = true;
-			} else {
-				mov[3] = mov[0] = mov[1] = true;
-			}
-
-			// Columna Derecha
-		} else if (j == c - 1) {
-			if (i == f - 1) {
-				mov[2] = mov[0] = true;
-			} else {
-				mov[2] = mov[0] = mov[1] = true;
-			}
-			// Fila Abajo
-		} else if (i == f - 1) {
-			mov[0] = mov[2] = mov[3] = true;
-		} else {
-			for (int x = 0; x < 4; x++) {
-				mov[x] = true;
-			}
-		}
+		if(y==0)
+			mov[2]=false;
+		if(y==piezas[0].length-1)
+			mov[3]=false;
+		if(x==0)
+			mov[0]=false;
+		if(x==piezas.length-1)
+			mov[1]=false;
 		return mov;
 	}
 	
-
+	public Rectangulo [][] CopiarMatriz(Rectangulo  [][] estadoActual){
+		Rectangulo [][] piezas=new Rectangulo[estadoActual.length][estadoActual[0].length];
+	
+		for (int i = 0; i < estadoActual.length; i++) {
+			for (int j = 0; j < estadoActual[0].length; j++) {
+				piezas[i][j] = estadoActual[i][j];
+			}
+		}
+		return piezas;
+	}
 }

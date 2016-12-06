@@ -385,7 +385,7 @@ public class Puzzle {
 	private class BtnReconstruirActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			Estado e=new Estado(imagen2);
-			Algoritmo solucion = new Algoritmo(new EspacioEstados(e,imagen1), e);
+			Algoritmo solucion = new Algoritmo(new EspacioEstados(), e);
 		}
 	}
 }
