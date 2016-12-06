@@ -36,6 +36,8 @@ public class Algoritmo {
 				LS=eS.Sucesores(n_actual.getEstado());
 				//Vamos creando un nodo por cada sucesor
 				for(int i=0;i<LS.size();i++){
+					//Nodo nuevoNodo=new Nodo(id, n_actual, LS.get(i), 0);
+					//front.Insertar(nuevoNodo);
 					if(n_actual.getPadre()!=null){
 						if(!LS.get(i).equals(n_actual.getPadre().getEstado())){
 							Nodo nuevoNodo=new Nodo(id, n_actual, LS.get(i), 0);
@@ -68,8 +70,8 @@ public class Algoritmo {
 	public int CalcularValor(Nodo nodo, int estrategia){
 		int valor=0;
 		if(estrategia == 1){
-			valor=nodo.getProfundidad() +1;
-			//valor=nodo.getH()+nodo.getCosto();
+			//valor=nodo.getProfundidad() +1;
+			valor=nodo.getH()+nodo.getCosto();
 		}else if(estrategia == 2){
 			valor=nodo.getCosto()+1;
 		}else if(estrategia == 3){

@@ -22,29 +22,30 @@ public class EspacioEstados {
 			}
 		}
 		
-		for(int i=0; i<rec.length; i++){
-			for (int j=0; j<rec[0].length; j++){
-				if(rec[i][j].getIdImage()!=objetivo[i][j]){
-					solucion=false;
-				}
-			}
-		}
 		return solucion;
 	}
 	
 	public List<Estado> Sucesores(Estado estado){
 		List<Estado> sucesores= new ArrayList<>();
-		Rectangulo[][] piezas=CopiarMatriz(estado.getPiezas());
 		int [] posicionNegro=PosicionNegro(estado.getPiezas());
+		Estado estadoNuevo;
 		boolean[] mov=MovimientosPosibles(estado.getPiezas(), posicionNegro);
 		
 		for(int i=0;i<mov.length;i++){
 			if(mov[i]){
-				Estado estadoNuevo=RealizarMovimiento(piezas, i, posicionNegro);
+				Rectangulo[][] nuevaMatriz=CopiarMatriz(estado.getPiezas());
+				estadoNuevo=RealizarMovimiento(nuevaMatriz, i, posicionNegro);
 				sucesores.add(estadoNuevo);
+				
+				}
+			}
+		for(int i=0;i<sucesores.size();i++){
+			for(int k=0; k<sucesores.get(i).getPiezas().length; k++){
+				for (int j=0; j<sucesores.get(i).getPiezas()[0].length; j++){
+					System.out.println(sucesores.get(i).getPiezas()[k][j].getIdImage());
+				}
 			}
 		}
-		
 		return sucesores;
 	}
 	
