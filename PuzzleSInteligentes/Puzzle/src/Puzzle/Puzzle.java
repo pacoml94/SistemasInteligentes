@@ -386,6 +386,8 @@ public class Puzzle {
 		public void actionPerformed(ActionEvent arg0) {
 			Estado e=new Estado(imagen2);
 			Algoritmo solucion = new Algoritmo(new EspacioEstados(), e);
+			Mezcla mezcla = new Mezcla(solucion.getEstadoFinal(), f, c);
+			mezcla.setVisible(true);
 		}
 	}
 }

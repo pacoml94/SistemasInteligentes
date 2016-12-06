@@ -8,6 +8,7 @@ import Solucion.Nodo;
 import Solucion.Problema;
 
 public class Algoritmo {
+	private Rectangulo[][] estadoFinal;
 	private EspacioEstados eS;
 	private Estado e;
 	private Frontera front;
@@ -30,6 +31,7 @@ public class Algoritmo {
 		while(!solucion && !front.esVacia()){
 			n_actual=SeleccionaNodo(front);
 			if(eS.esObjetivo(n_actual.getEstado())){
+				estadoFinal=n_actual.getEstado().getPiezas();
 				System.out.println("Puzzle resuelto");
 				solucion=true;
 			}else{
@@ -57,7 +59,7 @@ public class Algoritmo {
 		
 		return solucion;
 	}
-	
+
 	public void Busqueda(Problema prob, int estrategia, int prof_max, int prof_inc){
 		int prof_actual=prof_inc;
 		boolean solucion=false;
@@ -69,12 +71,12 @@ public class Algoritmo {
 	
 	public int CalcularValor(Nodo nodo, int estrategia){
 		int valor=0;
-		if(estrategia == 1){
+		if(estrategia == 1){ //anchura
 			//valor=nodo.getProfundidad() +1;
 			valor=nodo.getH()+nodo.getCosto();
-		}else if(estrategia == 2){
+		}else if(estrategia == 2){//coste Uniforme
 			valor=nodo.getCosto()+1;
-		}else if(estrategia == 3){
+		}else if(estrategia == 3){// profundidad
 			valor=nodo.getProfundidad() * (-1);
 		}
 		return valor;
@@ -83,5 +85,9 @@ public class Algoritmo {
 	public Nodo SeleccionaNodo(Frontera front){
 		Nodo n = front.getFrontera().remove(0);
 		return n;
+	}
+	
+	public Rectangulo[][] getEstadoFinal() {
+		return estadoFinal;
 	}
 }
