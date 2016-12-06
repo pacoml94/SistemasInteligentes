@@ -16,7 +16,7 @@ public class Algoritmo {
 		this.e=e;
 		front=new Frontera();
 		Problema prob=new Problema(eS, e);
-		Busqueda(prob, 2, 9999, 1);
+		Busqueda(prob, 1, 9999, 1);
 	}
 	
 	public boolean BusquedaAcotada(Problema prob, int estrategia, int prof_max){
@@ -38,12 +38,14 @@ public class Algoritmo {
 				for(int i=0;i<LS.size();i++){
 					if(n_actual.getPadre()!=null){
 						if(!LS.get(i).equals(n_actual.getPadre().getEstado())){
-							Nodo nuevoNodo=new Nodo(id, n_actual, LS.get(i), CalcularValor(n_actual, estrategia));
+							Nodo nuevoNodo=new Nodo(id, n_actual, LS.get(i), 0);
+							nuevoNodo.setValor(CalcularValor(nuevoNodo, estrategia));
 							front.Insertar(nuevoNodo); //Insertamos cada nodo en la frontera que se va ordenando por su valor
 							id++;
 						}
 					}else{
-						Nodo nuevoNodo=new Nodo(id, n_actual, LS.get(i), CalcularValor(n_actual, estrategia));
+						Nodo nuevoNodo=new Nodo(id, n_actual, LS.get(i), 0);
+						nuevoNodo.setValor(CalcularValor(nuevoNodo, estrategia));
 						front.Insertar(nuevoNodo); //Insertamos cada nodo en la frontera que se va ordenando por su valor
 						id++;
 					}
@@ -66,7 +68,8 @@ public class Algoritmo {
 	public int CalcularValor(Nodo padre, int estrategia){
 		int valor=0;
 		if(estrategia == 1){
-			valor=padre.getProfundidad() +1;
+			//valor=padre.getProfundidad() +1;
+			valor=padre.getH();
 		}else if(estrategia == 2){
 			valor=padre.getCosto()+1;
 		}else if(estrategia == 3){
