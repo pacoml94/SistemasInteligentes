@@ -7,16 +7,23 @@ import Puzzle.Rectangulo;
 public class Estado {
 	
 	private Rectangulo [][]piezas;
+	private String movimiento="";
 	
 	public Estado (Rectangulo [][]piezas){
 		this.piezas=piezas;
-		
 	}
 	
 	public Rectangulo[][] getPiezas(){
 		return piezas;
 	}
 
+	public String getMovimiento() {
+		return movimiento;
+	}
+
+	public void setMovimiento(String movimiento) {
+		this.movimiento = movimiento;
+	}
 
 	public boolean equals(Rectangulo[][] piezas1) {
 		boolean igual=true;

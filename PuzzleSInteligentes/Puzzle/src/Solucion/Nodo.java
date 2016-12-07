@@ -4,6 +4,7 @@ import Puzzle.Rectangulo;
 
 public class Nodo {
     private int id;
+    private String accion;
 	private Estado estado;
 	private Nodo padre;
 	private int valor; 
@@ -11,23 +12,26 @@ public class Nodo {
 	private int profundidad; //profundidad que ocupa ese nodo en el arbol
 	private int h;  //Numero de nodos que faltan para llegar al estado objetivo
     
-    public Nodo(int id, Nodo padre, Estado e, int valor) {
+    public Nodo(int id, Nodo padre, Estado e, String accion) {
     	this.id=id;
+    	this.accion=accion;
     	this.estado=e;
         this.padre=padre;
         this.profundidad=padre.getProfundidad()+1;
         this.costo=padre.getCosto()+1;
-        this.valor=valor;
+        this.valor=0;
         this.h=calcularHeuristica();
     }
-    public Nodo(Estado e){
+    
+	public Nodo(Estado e){
     	id=0;
     	this.estado=e;
+    	h=calcularHeuristica();
     	valor=calcularHeuristica();
     	costo=0;
     	padre=null;
     	profundidad=0;
-    	h=calcularHeuristica();
+    	accion=null;
     }
     
 	public Nodo getPadre() {
@@ -37,6 +41,13 @@ public class Nodo {
 		this.padre = padre;
 	}
 
+	public String getAccion() {
+		return accion;
+	}
+	public void setAccion(String accion) {
+		this.accion = accion;
+	}
+	
     public Estado getEstado() {
 		return estado;
 	}

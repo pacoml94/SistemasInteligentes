@@ -51,6 +51,7 @@ public class EspacioEstados {
 	public Estado RealizarMovimiento(Rectangulo[][] piezas, int i, int[]posicionNegro){
 		int x=posicionNegro[0];
 		int y=posicionNegro[1];
+		String movimiento="";
 		Estado estadoNuevo;
 		Rectangulo aux;
 		switch(i){
@@ -58,26 +59,30 @@ public class EspacioEstados {
 			aux=piezas[x-1][y];
 			piezas[x-1][y]=piezas[x][y];
 			piezas[x][y]=aux;
+			movimiento="arriba";
 			break;
 		case 1: //abajo
 			aux=piezas[x+1][y];
 			piezas[x+1][y]=piezas[x][y];
 			piezas[x][y]=aux;
+			movimiento="abajo";
 			break;
 		case 2: //izquierda
 			aux=piezas[x][y-1];
 			piezas[x][y-1]=piezas[x][y];
 			piezas[x][y]=aux;
+			movimiento="izquierda";
 			break;
 		case 3: //derecha
 			aux=piezas[x][y+1];
 			piezas[x][y+1]=piezas[x][y];
 			piezas[x][y]=aux;
+			movimiento="derecha";
 			break;
 		}
 		
 		estadoNuevo = new Estado(piezas);
-		
+		estadoNuevo.setMovimiento(movimiento);
 		return estadoNuevo;
 	}
 	

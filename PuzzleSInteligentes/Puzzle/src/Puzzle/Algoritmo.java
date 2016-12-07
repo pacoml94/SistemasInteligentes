@@ -1,4 +1,7 @@
 package Puzzle;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import Solucion.EspacioEstados;
@@ -29,11 +32,15 @@ public class Algoritmo {
 		front.Insertar(n_inicial);
 		boolean solucion=false;
 		while(!solucion && !front.esVacia()){
-			n_actual=SeleccionaNodo(front);
+			n_actual=front.getFrontera().remove(0);
 			if(eS.esObjetivo(n_actual.getEstado())){
-				estadoFinal=n_actual.getEstado().getPiezas();
-				System.out.println("Puzzle resuelto");
 				solucion=true;
+				System.out.println("Puzzle resuelto");
+				estadoFinal=n_actual.getEstado().getPiezas();
+				
+				recorrido(n_actual);
+				
+					
 			}else{
 				LS=eS.Sucesores(n_actual.getEstado());
 				//Vamos creando un nodo por cada sucesor
@@ -42,13 +49,13 @@ public class Algoritmo {
 					//front.Insertar(nuevoNodo);
 					if(n_actual.getPadre()!=null){
 						if(!LS.get(i).equals(n_actual.getPadre().getEstado())){
-							Nodo nuevoNodo=new Nodo(id, n_actual, LS.get(i), 0);
+							Nodo nuevoNodo=new Nodo(id, n_actual, LS.get(i), LS.get(i).getMovimiento());
 							nuevoNodo.setValor(CalcularValor(nuevoNodo, estrategia));
 							front.Insertar(nuevoNodo); //Insertamos cada nodo en la frontera que se va ordenando por su valor
 							id++;
 						}
 					}else{
-						Nodo nuevoNodo=new Nodo(id, n_actual, LS.get(i), 0);
+						Nodo nuevoNodo=new Nodo(id, n_actual, LS.get(i), LS.get(i).getMovimiento());
 						nuevoNodo.setValor(CalcularValor(nuevoNodo, estrategia));
 						front.Insertar(nuevoNodo); //Insertamos cada nodo en la frontera que se va ordenando por su valor
 						id++;
@@ -69,6 +76,43 @@ public class Algoritmo {
 		}
 	}
 	
+	public void recorrido(Nodo nodoFinal){
+		Nodo padre = nodoFinal.getPadre();
+		
+		try{
+			FileWriter fw=new FileWriter("Recorrido.txt");
+			PrintWriter pw = new PrintWriter(fw);
+			pw.println(nodoFinal.getAccion()+"; estado final: ");
+			for(int i=0;i<nodoFinal.getEstado().getPiezas().length;i++){
+				for(int j=0;j<nodoFinal.getEstado().getPiezas()[0].length;j++){
+					pw.print(nodoFinal.getEstado().getPiezas()[i][j].getIdImage()+" ");
+				}
+				pw.println(" ");
+			}
+			while(padre.getAccion()!=null){
+				Rectangulo[][] rec = padre.getEstado().getPiezas();
+				pw.println(padre.getAccion()+"; estado: ");
+				for(int i=0;i<rec.length;i++){
+					for(int j=0;j<rec[0].length;j++){
+						pw.print(rec[i][j].getIdImage()+" ");
+					}
+					pw.println(" ");
+				}
+				padre=padre.getPadre();
+			}
+			pw.println("Estado inicial: ");
+			for(int i=0;i<padre.getEstado().getPiezas().length;i++){
+				for(int j=0;j<padre.getEstado().getPiezas()[0].length;j++){
+					pw.print(padre.getEstado().getPiezas()[i][j].getIdImage()+" ");
+				}
+				pw.println(" ");
+			}
+			fw.close();
+		}catch(Exception e) {
+            e.printStackTrace();
+        }
+	}
+	
 	public int CalcularValor(Nodo nodo, int estrategia){
 		int valor=0;
 		if(estrategia == 1){ //anchura
@@ -80,11 +124,6 @@ public class Algoritmo {
 			valor=nodo.getProfundidad() * (-1);
 		}
 		return valor;
-	}
-	
-	public Nodo SeleccionaNodo(Frontera front){
-		Nodo n = front.getFrontera().remove(0);
-		return n;
 	}
 	
 	public Rectangulo[][] getEstadoFinal() {
