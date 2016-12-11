@@ -80,8 +80,7 @@ public class Algoritmo {
 		Nodo padre = nodoFinal.getPadre();
 		
 		try{
-			FileWriter fw=new FileWriter("Recorrido.txt");
-			PrintWriter pw = new PrintWriter(fw);
+			PrintWriter pw = new PrintWriter(new FileWriter("Recorrido.txt"));
 			pw.println(nodoFinal.getAccion()+"; estado final: ");
 			for(int i=0;i<nodoFinal.getEstado().getPiezas().length;i++){
 				for(int j=0;j<nodoFinal.getEstado().getPiezas()[0].length;j++){
@@ -107,7 +106,7 @@ public class Algoritmo {
 				}
 				pw.println(" ");
 			}
-			fw.close();
+			pw.close();
 		}catch(Exception e) {
             e.printStackTrace();
         }
