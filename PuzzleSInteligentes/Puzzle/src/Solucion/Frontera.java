@@ -19,7 +19,7 @@ public class Frontera {
     }
     
     public List<Nodo> Insertar(Nodo nodo){ //Cambiar metodo en funcion del algoritmo
-    	long tiempo_inicial, tiempo_final;
+    	//long tiempo_inicial, tiempo_final;
     	this.nodo=nodo;
     	boolean insertado = false;
     	//tiempo_inicial = System.nanoTime();

@@ -175,13 +175,11 @@ public class Puzzle {
 			imagen1 = negro(imagen1);
 			if (compare(imagen1, imagen2)) {
 				System.out.println("Las imagenes son iguales ");
-				
 				PosicionNegro();
 				MovimientosPosibles(a, b);
 				RealizarMovimiento();
 				MovimientosPosibles(a, b);
-				/*Mezcla mezcla = new Mezcla(imagen2, f, c);
-				mezcla.setVisible(true);*/
+				
 				//Manejador de botones
 				btnComprobar.setEnabled(false);
 				btnReconstruir.setEnabled(true);
@@ -238,9 +236,6 @@ public class Puzzle {
 			Rectangulo rec = new Rectangulo(img, 0);
 			imagen[0][0]=rec;
 			
-			/*Mezcla mezcla = new Mezcla(imagen, f, c);
-			mezcla.setVisible(true);*/
-			
 			return imagen;
 		}
 
@@ -252,12 +247,12 @@ public class Puzzle {
 				for (int j = 0; j < c; j++) {
 					for (int k = 0; k < f; k++) {
 						for (int z = 0; z < c; z++) {
-							if (iguales(imagen1[i][j].getImage(), imagen2[k][z].getImage())) {
-								imagen2[k][z].setIdImage(imagen1[i][j].getIdImage());
-								cont++;
+							if (iguales(imagen1[i][j].getImage(), imagen2[k][z].getImage()) && imagen2[k][z].isIdentificador()==false) {
+				                imagen2[k][z].setIdImage(imagen1[i][j].getIdImage());
+				                imagen2[k][z].setIdentificador(true);
+				                cont++;
 								z = c;
 								k = f;
-
 							}
 						}
 					}
@@ -392,11 +387,6 @@ public class Puzzle {
 					}
 				}
 			}
-		}
-		
-		@SuppressWarnings("unused")
-		private boolean estaResuelto() {
-			return false;
 		}
 	}
 	private class miFocusListener extends FocusAdapter {

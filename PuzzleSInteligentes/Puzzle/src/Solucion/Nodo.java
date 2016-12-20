@@ -97,9 +97,8 @@ public class Nodo {
     	int id=0, heu=0;
     	for(int i=0;i<estado.getPiezas().length;i++){
     		for(int j=0;j<estado.getPiezas()[0].length;j++){
-    			if(estado.getPiezas()[i][j].getIdImage()!=id) heu++;
+    			if(estado.getPiezas()[i][j].getIdImage()!=0 && estado.getPiezas()[i][j].getIdImage()!=id) heu++;
     			id++;
-    			
     		}
     	}
     	return heu;

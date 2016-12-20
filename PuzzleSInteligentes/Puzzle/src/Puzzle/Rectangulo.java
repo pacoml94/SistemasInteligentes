@@ -9,11 +9,21 @@ import javax.swing.JLabel;
 public class Rectangulo extends JLabel {
 	private BufferedImage image;
 	private int idImage;
+	private boolean identificador;
 
 	public Rectangulo(BufferedImage image, int idImage) {
 		super(new ImageIcon(image));
 		this.image = image;
 		this.idImage = idImage;
+		this.identificador=false;
+	}
+
+	public boolean isIdentificador() {
+		return identificador;
+	}
+
+	public void setIdentificador(boolean identificador) {
+		this.identificador = identificador;
 	}
 
 	public int getIdImage() {
