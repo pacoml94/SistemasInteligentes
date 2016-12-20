@@ -172,9 +172,10 @@ public class Puzzle {
 			c = Integer.parseInt(textColumnas.getText());
 			imagen1 = cortar(source1);
 			imagen2 = cortar(source2);
-
+			imagen1 = negro(imagen1);
 			if (compare(imagen1, imagen2)) {
 				System.out.println("Las imagenes son iguales ");
+				
 				PosicionNegro();
 				MovimientosPosibles(a, b);
 				RealizarMovimiento();
@@ -215,6 +216,32 @@ public class Puzzle {
 			}
 
 			return rectangulos;
+		}
+		//metodo que convierte en negro la posicion (0,0)
+		private Rectangulo[][] negro(Rectangulo[][] imagen){
+			BufferedImage bf=null;
+			int widthRec = imagen[0][0].getImage().getWidth();
+			int heightRec = imagen[0][0].getImage().getHeight();
+			
+			File file = new File("black.png");
+			try {
+				bf = ImageIO.read(file);
+			} catch (IOException e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+			BufferedImage img = new BufferedImage(widthRec, heightRec, imagen[0][0].getImage().getType());
+			Graphics2D g = img.createGraphics();
+			g.drawImage(bf, 0, 0, widthRec, heightRec, widthRec * 0, heightRec * 0, widthRec * 0 + widthRec,
+					heightRec * 0 + heightRec, null);
+			g.dispose();
+			Rectangulo rec = new Rectangulo(img, 0);
+			imagen[0][0]=rec;
+			
+			/*Mezcla mezcla = new Mezcla(imagen, f, c);
+			mezcla.setVisible(true);*/
+			
+			return imagen;
 		}
 
 		// metodo que compara las imagenes cortadas y guardadas en el array

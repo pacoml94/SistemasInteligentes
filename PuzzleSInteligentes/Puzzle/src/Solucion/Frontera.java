@@ -22,7 +22,7 @@ public class Frontera {
     	long tiempo_inicial, tiempo_final;
     	this.nodo=nodo;
     	boolean insertado = false;
-    	tiempo_inicial = System.nanoTime();
+    	//tiempo_inicial = System.nanoTime();
     	if (frontera.isEmpty()) frontera.add(nodo);
     	else{
     		for(int i=0;i<frontera.size()&&!insertado;i++){
@@ -36,9 +36,9 @@ public class Frontera {
     		}
     	}
 
-    	tiempo_final = System.nanoTime();
+    	//tiempo_final = System.nanoTime();
     	
-    	System.out.printf("Tiempo de insercion del nodo %d = %d\n", nodo.getId(), (tiempo_final - tiempo_inicial));
+    	//System.out.printf("Tiempo de insercion del nodo %d = %d\n", nodo.getId(), (tiempo_final - tiempo_inicial));
     	
     	return frontera;	
     }

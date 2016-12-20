@@ -3,6 +3,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Stack;
 
 import Solucion.EspacioEstados;
 import Solucion.Estado;
@@ -77,8 +78,38 @@ public class Algoritmo {
 	}
 	
 	public void recorrido(Nodo nodoFinal){
-		Nodo padre = nodoFinal.getPadre();
+		Stack<Nodo> pila = new Stack<>();
+		Nodo nodo = nodoFinal.getPadre();
+		pila.push(nodoFinal);
+		while (nodo.getPadre()!=null){
+			pila.push(nodo);
+			nodo = nodo.getPadre();
+		}
 		
+		try{
+			PrintWriter pw = new PrintWriter(new FileWriter("Recorrido.txt"));
+			pw.println("Estado inicial: ");
+			for(int i=0;i<nodo.getEstado().getPiezas().length;i++){
+				for(int j=0;j<nodo.getEstado().getPiezas()[0].length;j++){
+					pw.print(nodo.getEstado().getPiezas()[i][j].getIdImage()+" ");
+				}
+				pw.println(" ");
+			}
+			while(!pila.isEmpty()){
+				Nodo nodo_pila = pila.pop();
+				pw.println(nodo_pila.getAccion()+"; estado: ");
+				for(int i=0;i<nodo_pila.getEstado().getPiezas().length;i++){
+					for(int j=0;j<nodo_pila.getEstado().getPiezas()[0].length;j++){
+						pw.print(nodo_pila.getEstado().getPiezas()[i][j].getIdImage()+" ");
+					}
+					pw.println(" ");
+				}
+			}
+			pw.close();
+		}catch(Exception e) {
+            e.printStackTrace();
+		}
+		/*Nodo padre = nodoFinal.getPadre();
 		try{
 			PrintWriter pw = new PrintWriter(new FileWriter("Recorrido.txt"));
 			pw.println(nodoFinal.getAccion()+"; estado final: ");
@@ -109,7 +140,7 @@ public class Algoritmo {
 			pw.close();
 		}catch(Exception e) {
             e.printStackTrace();
-        }
+        }*/
 	}
 	
 	public int CalcularValor(Nodo nodo, int estrategia){
